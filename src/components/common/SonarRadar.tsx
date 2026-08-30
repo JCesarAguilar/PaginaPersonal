@@ -180,7 +180,7 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
                     blipRefs.current[i] = { dot: null, label: null };
                   blipRefs.current[i].dot = el;
                 }}
-                className="w-1.5 h-1.5 rounded-full bg-[#3DFFB0] shadow-[0_0_8px_#3DFFB0]"
+                className="w-1.5 h-1.5 rounded-full bg-green-main shadow-[0_0_8px_#3DFFB0]"
               />
               <span
                 ref={(el) => {

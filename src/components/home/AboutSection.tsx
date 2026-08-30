@@ -38,22 +38,6 @@ const STAGES: Stage[] = [
     imageAlt: "Julio aprendiendo desarrollo de software",
     tag: "Full-stack + IA",
   },
-  {
-    eyebrow: "Hoy",
-    headline: "Construyo sistemas de IA en producción.",
-    body: "Asistentes RAG que citan la fuente exacta. Agentes LLM. Productos full-stack de extremo a extremo.",
-    images: [],
-    imageAlt: "Julio trabajando en sistemas de IA",
-    tag: "AI Engineer",
-  },
-  {
-    eyebrow: "El resultado",
-    headline: "RedLegal.pe — IA legal que no alucina.",
-    body: "Mi sistema RAG cita artículo y código exactos del Perú. De la idea a producción, sin atajos.",
-    images: [],
-    imageAlt: "Captura de RedLegal.pe en funcionamiento",
-    tag: "RedLegal.pe",
-  },
 ];
 
 export default function AboutSection() {
