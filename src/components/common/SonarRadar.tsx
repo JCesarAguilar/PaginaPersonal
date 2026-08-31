@@ -16,14 +16,14 @@ interface BlipElements {
 }
 
 const STACK_BLIPS: StackBlip[] = [
-  { label: "Python", angle: 20, radius: 100 },
-  { label: "LangChain", angle: 65, radius: 260 },
-  { label: "RAG", angle: 110, radius: 200 },
-  { label: "Pinecone", angle: 155, radius: 250 },
-  { label: "Next.js", angle: 205, radius: 230 },
-  { label: "NestJS", angle: 250, radius: 260 },
-  { label: "PostgreSQL", angle: 295, radius: 210 },
-  { label: "TypeScript", angle: 340, radius: 245 },
+  { label: "Pinecone", angle: 20, radius: 100 },
+  { label: "Next.js", angle: 65, radius: 260 },
+  { label: "NestJS", angle: 110, radius: 200 },
+  { label: "PostgreSQL", angle: 155, radius: 250 },
+  { label: "Python", angle: 205, radius: 230 },
+  { label: "TypeScript", angle: 250, radius: 260 },
+  { label: "LangChain", angle: 295, radius: 210 },
+  { label: "RAG", angle: 340, radius: 245 },
 ];
 
 // Ancho del "haz" del sonar. Debe calzar con el conic-gradient (60deg) de abajo.

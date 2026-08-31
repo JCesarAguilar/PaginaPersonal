@@ -1,10 +1,12 @@
 "use client";
 
-import { useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import Image from "next/image";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,9 +14,13 @@ interface Stage {
   eyebrow: string;
   headline: string;
   body: string;
-  images: string[]; // 1 o más rutas. Si hay 2+, van cambiando según el scroll dentro de esta etapa.
+  images: string[];
   imageAlt: string;
   tag: string;
+  // Cuánto "espacio" de scroll ocupa esta etapa comparado con las demás.
+  // 1 = normal. 1.8 = casi el doble de scroll para verla completa.
+  // Súbelo si tiene varias fotos o mucho texto; bájalo si es simple.
+  weight?: number;
 }
 
 const STAGES: Stage[] = [
@@ -29,6 +35,7 @@ const STAGES: Stage[] = [
     ],
     imageAlt: "Julio en la Marina de Guerra del Perú",
     tag: "Liderazgo operativo",
+    weight: 1.8, // 3 fotos + párrafo largo → necesita más scroll
   },
   {
     eyebrow: "La transición",
@@ -36,7 +43,8 @@ const STAGES: Stage[] = [
     body: "Hace 16 meses empecé a estudiar y programar de manera intensiva, primero como desarrollador full-stack, construyendo proyectos personales de extremo a extremo hasta llevar uno de ellos, RedLegal.pe, a producción real. Hoy mi foco está en especializarme en inteligencia artificial desde sus fundamentos: entrenamiento de modelos, sistemas RAG, agentes LLM y aplicaciones que integran modelos de lenguaje en productos reales.",
     images: ["/images/setup-desarrollador-web.jpg"],
     imageAlt: "Julio aprendiendo desarrollo de software",
-    tag: "Full-stack + IA",
+    tag: "Full-stack + IA Engineer",
+    weight: 1,
   },
 ];
 
@@ -48,25 +56,35 @@ export default function AboutSection() {
       const stageEls = gsap.utils.toArray<HTMLElement>(".pin-stage");
       const cardEls = gsap.utils.toArray<HTMLElement>(".pin-card");
 
-      // Estado inicial: solo la primera etapa y tarjeta visibles
       gsap.set(stageEls, { opacity: 0, y: 30 });
       gsap.set(stageEls[0], { opacity: 1, y: 0 });
       gsap.set(cardEls, { opacity: 0, scale: 0.94 });
       gsap.set(cardEls[0], { opacity: 1, scale: 1 });
 
-      // Ventana activa de cada etapa dentro del timeline (mismas posiciones
-      // que usa el cross-fade de texto), para poder repartir las imágenes
-      // dentro de ese mismo rango de scroll.
+      // Posiciones acumuladas según el "weight" de cada etapa.
+      // boundaries[i] = dónde empieza la etapa i en el timeline.
+      // Con weight=1.8 en la primera, esa etapa ocupa 1.8x más "tiempo"
+      // que una etapa normal (weight=1) → más scroll físico para pasarla.
+      const boundaries = [0];
+      STAGES.forEach((stage) => {
+        boundaries.push(
+          boundaries[boundaries.length - 1] + (stage.weight ?? 1),
+        );
+      });
+      const totalDuration = boundaries[boundaries.length - 1];
+
       const stageWindows = STAGES.map((_, i) => ({
-        start: i === 0 ? 0 : i + 0.1,
-        end: i + 0.5,
+        start: i === 0 ? 0 : boundaries[i] + 0.1,
+        end: boundaries[i + 1] - 0.5,
       }));
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
           start: "top top",
-          end: `+=${stageEls.length * 100}%`,
+          // El scroll total ahora es proporcional al peso acumulado,
+          // no solo a la cantidad de etapas.
+          end: `+=${totalDuration * 100}%`,
           scrub: 0.8,
           pin: true,
           anticipatePin: 1,
@@ -78,28 +96,30 @@ export default function AboutSection() {
         const prevText = stageEls[i - 1];
         const prevCard = cardEls[i - 1];
         const nextCard = cardEls[i];
+        const boundary = boundaries[i];
 
-        tl.to(prevText, { opacity: 0, y: -30, duration: 0.4 }, i - 0.5)
-          .to(prevCard, { opacity: 0, scale: 0.94, duration: 0.4 }, i - 0.5)
+        tl.to(prevText, { opacity: 0, y: -30, duration: 0.4 }, boundary - 0.5)
+          .to(
+            prevCard,
+            { opacity: 0, scale: 0.94, duration: 0.4 },
+            boundary - 0.5,
+          )
           .fromTo(
             el,
             { opacity: 0, y: 30 },
             { opacity: 1, y: 0, duration: 0.4 },
-            i - 0.3,
+            boundary - 0.3,
           )
           .fromTo(
             nextCard,
             { opacity: 0, scale: 0.94 },
             { opacity: 1, scale: 1, duration: 0.4 },
-            i - 0.3,
+            boundary - 0.3,
           );
       });
 
       tl.to(".pin-progress-bar", { scaleY: 1, ease: "none" }, 0);
 
-      // Dentro de cada etapa con 2+ imágenes: las va cross-fadeando
-      // repartidas uniformemente en la ventana activa de esa etapa,
-      // atado al mismo scrub → cambian exactamente según cuánto scrolleas.
       STAGES.forEach((stage, stageIndex) => {
         if (stage.images.length < 2) return;
 
@@ -131,10 +151,10 @@ export default function AboutSection() {
 
   return (
     <section
+      id={toSectionId(PATHROUTES.ABOUT)}
       ref={container}
       className="relative min-h-screen w-full overflow-hidden bg-white-smoke flex items-center px-6 md:px-20"
     >
-      {/* Barra de progreso lateral */}
       <div className="hidden md:block absolute left-8 top-1/2 -translate-y-1/2 w-px h-40 bg-[#1A2220]/20">
         <div
           className="pin-progress-bar absolute top-0 left-0 w-full h-full bg-green-main origin-top"
@@ -142,18 +162,19 @@ export default function AboutSection() {
         />
       </div>
 
-      {/* Layout: texto a la izquierda, tarjeta a la derecha */}
       <div className="relative z-10 w-full md:ml-16 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-        {/* Columna de texto */}
         <div className="relative h-70 md:h-60">
           {STAGES.map((stage, i) => (
             <div
               key={i}
               className="pin-stage absolute inset-0 flex flex-col justify-center"
             >
-              <p className="font-mono text-xs tracking-[0.3em] uppercase text-green-main mb-4">
-                {stage.eyebrow}
-              </p>
+              <div className="bg-black-background  justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-3">
+                <p className="font-mono text-xs tracking-[0.3em] uppercase text-green-main ">
+                  {stage.eyebrow}
+                </p>
+              </div>
+
               <h2 className="font-sans font-bold text-3xl md:text-5xl text-black-medium leading-[1.1] mb-4">
                 {stage.headline}
               </h2>
@@ -164,7 +185,6 @@ export default function AboutSection() {
           ))}
         </div>
 
-        {/* Columna de tarjeta / imagen */}
         <div className="relative h-80 md:h-96">
           {STAGES.map((stage, i) => (
             <div

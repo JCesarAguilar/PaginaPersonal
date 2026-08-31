@@ -1,9 +1,13 @@
 export enum PATHROUTES {
   HOME = "/",
-  SOLUTIONS = "/services",
-  PROJECTS = "/projects",
-  ABOUT = "/about",
-  CONTACT = "/contact",
+  ABOUT = "#sobre-mi",
+  PROJECTS = "#proyectos",
+  SOLUTIONS = "#servicios",
+  CONTACT = "#contacto",
+}
+
+export function toSectionId(route: PATHROUTES): string {
+  return route.replace("#", "");
 }
 
 export const publicNavItems = [
@@ -12,13 +16,14 @@ export const publicNavItems = [
     route: PATHROUTES.ABOUT,
   },
   {
-    name: "Soluciones",
-    route: PATHROUTES.SOLUTIONS,
-  },
-  {
     name: "Proyectos",
     route: PATHROUTES.PROJECTS,
   },
+  {
+    name: "Soluciones",
+    route: PATHROUTES.SOLUTIONS,
+  },
+
   {
     name: "Contacto",
     route: PATHROUTES.CONTACT,
