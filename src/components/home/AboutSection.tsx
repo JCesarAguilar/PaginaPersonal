@@ -150,92 +150,93 @@ export default function AboutSection() {
   );
 
   return (
-    <section
-      id={toSectionId(PATHROUTES.ABOUT)}
-      ref={container}
-      className="relative min-h-screen w-full overflow-hidden bg-white-smoke flex items-center px-6 md:px-20"
-    >
-      <div className="hidden md:block absolute left-8 top-1/2 -translate-y-1/2 w-px h-40 bg-[#1A2220]/20">
-        <div
-          className="pin-progress-bar absolute top-0 left-0 w-full h-full bg-green-main origin-top"
-          style={{ transform: "scaleY(0)" }}
-        />
-      </div>
+    <div id={toSectionId(PATHROUTES.ABOUT)}>
+      <section
+        ref={container}
+        className="relative min-h-screen w-full overflow-hidden bg-white-smoke flex items-center px-6 md:px-20"
+      >
+        <div className="hidden md:block absolute left-8 top-1/2 -translate-y-1/2 w-px h-40 bg-[#1A2220]/20">
+          <div
+            className="pin-progress-bar absolute top-0 left-0 w-full h-full bg-black-background origin-top"
+            style={{ transform: "scaleY(0)" }}
+          />
+        </div>
 
-      <div className="relative z-10 w-full md:ml-16 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-        <div className="relative h-70 md:h-60">
-          {STAGES.map((stage, i) => (
-            <div
-              key={i}
-              className="pin-stage absolute inset-0 flex flex-col justify-center"
-            >
-              <div className="bg-black-background  justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-3">
-                <p className="font-mono text-xs tracking-[0.3em] uppercase text-green-main ">
-                  {stage.eyebrow}
+        <div className="relative z-10 w-full md:ml-16 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+          <div className="relative h-70 md:h-60">
+            {STAGES.map((stage, i) => (
+              <div
+                key={i}
+                className="pin-stage absolute inset-0 flex flex-col justify-center"
+              >
+                <div className="bg-black-background  justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-3">
+                  <p className="font-mono text-xs tracking-[0.3em] uppercase text-green-main ">
+                    {stage.eyebrow}
+                  </p>
+                </div>
+
+                <h2 className="font-sans font-bold text-3xl md:text-5xl text-black-medium leading-[1.1] mb-4">
+                  {stage.headline}
+                </h2>
+                <p className="max-w-xl text-gray-strong text-base md:text-lg leading-relaxed">
+                  {stage.body}
                 </p>
               </div>
+            ))}
+          </div>
 
-              <h2 className="font-sans font-bold text-3xl md:text-5xl text-black-medium leading-[1.1] mb-4">
-                {stage.headline}
-              </h2>
-              <p className="max-w-xl text-gray-strong text-base md:text-lg leading-relaxed">
-                {stage.body}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="relative h-80 md:h-96">
-          {STAGES.map((stage, i) => (
-            <div
-              key={i}
-              className="pin-card absolute inset-0 rounded-2xl overflow-hidden border border-black-medium/10 bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]"
-            >
-              {stage.images.length > 0 ? (
-                <>
-                  {stage.images.map((src, imgIndex) => (
-                    <div
-                      key={src}
-                      className={`pin-card-img-${i} absolute inset-0`}
-                    >
-                      <Image
-                        fill
-                        src={src}
-                        alt={`${stage.imageAlt} (${imgIndex + 1})`}
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
-
-                  {stage.images.length > 1 && (
-                    <div className="absolute bottom-4 right-4 z-10 flex gap-1.5">
-                      {stage.images.map((_, dotIndex) => (
-                        <span
-                          key={dotIndex}
-                          className={`pin-card-dot-${i} w-1.5 h-1.5 rounded-full bg-white opacity-40`}
+          <div className="relative h-80 md:h-96">
+            {STAGES.map((stage, i) => (
+              <div
+                key={i}
+                className="pin-card absolute inset-0 rounded-2xl overflow-hidden border border-black-medium/10 bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]"
+              >
+                {stage.images.length > 0 ? (
+                  <>
+                    {stage.images.map((src, imgIndex) => (
+                      <div
+                        key={src}
+                        className={`pin-card-img-${i} absolute inset-0`}
+                      >
+                        <Image
+                          fill
+                          src={src}
+                          alt={`${stage.imageAlt} (${imgIndex + 1})`}
+                          className="object-cover"
                         />
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-3 border-2 border-dashed border-black-medium/15 m-3 rounded-xl">
-                  <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-gray-strong/60">
-                    Reemplaza con tu imagen
-                  </span>
-                  <span className="font-mono text-[10px] text-gray-strong/40">
-                    {`stage.images = ["${stage.imageAlt}"]`}
-                  </span>
-                </div>
-              )}
+                      </div>
+                    ))}
 
-              <span className="absolute bottom-4 left-4 z-10 px-3 py-1.5 rounded-full bg-black-medium/85 backdrop-blur-sm font-mono text-[10px] tracking-[0.15em] uppercase text-green-main">
-                {stage.tag}
-              </span>
-            </div>
-          ))}
+                    {stage.images.length > 1 && (
+                      <div className="absolute bottom-4 right-4 z-10 flex gap-1.5">
+                        {stage.images.map((_, dotIndex) => (
+                          <span
+                            key={dotIndex}
+                            className={`pin-card-dot-${i} w-1.5 h-1.5 rounded-full bg-white opacity-40`}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-3 border-2 border-dashed border-black-medium/15 m-3 rounded-xl">
+                    <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-gray-strong/60">
+                      Reemplaza con tu imagen
+                    </span>
+                    <span className="font-mono text-[10px] text-gray-strong/40">
+                      {`stage.images = ["${stage.imageAlt}"]`}
+                    </span>
+                  </div>
+                )}
+
+                <span className="absolute bottom-4 left-4 z-10 px-3 py-1.5 rounded-full bg-black-medium/85 backdrop-blur-sm font-mono text-[10px] tracking-[0.15em] uppercase text-green-main">
+                  {stage.tag}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
