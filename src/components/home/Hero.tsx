@@ -34,17 +34,17 @@ export default function Hero() {
       <div className="relative z-10 text-left">
         <div className="font-sans leading-[0.95] gap-7 flex flex-col">
           <div className="flex flex-col gap-4">
-            <h1 className="hero-title-line font-mono text-3xl md:text-[40px] font-bold text-[#E8ECEA]">
+            <h2 className="hero-title-line font-mono text-3xl md:text-[35px] font-bold text-[#E8ECEA]">
               ¡Hola! Me llamo <span className="text-green-main">Julio</span>.
-            </h1>
+            </h2>
             <h3 className="hero-eyebrow font-mono text-sm tracking-[0.3em] uppercase text-green-main">
-              Desarrollo de software → AI Engineer
+              Desarrollo de software | AI Engineer
             </h3>
           </div>
 
-          <h2 className="hero-tagline text-3xl md:text-5xl font-medium text-[#E8ECEA]">
+          <h1 className="hero-tagline font-mono text-3xl md:text-[40px] font-medium text-[#E8ECEA]">
             Soluciones con Inteligencia Artificial
-          </h2>
+          </h1>
         </div>
       </div>
     </section>
