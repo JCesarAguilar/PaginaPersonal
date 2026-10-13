@@ -34,25 +34,25 @@ export default function Hero() {
       <div className="relative z-10 text-center md:text-left">
         <div className="font-sans leading-[0.95] gap-4 md:gap-7 flex flex-col">
           <div className="flex flex-col gap-4 items-center md:items-start">
-            <h2 className="hero-title-line font-mono text-3xl md:text-[35px] font-bold text-white-smoke">
+            <h1 className="hero-title-line font-mono text-3xl md:text-[35px] font-bold text-white-smoke">
               ¡Hola!
               <br className="md:hidden" /> Me llamo{" "}
               <span className="text-green-main">Julio</span>.
-            </h2>
-            <h3 className="hero-eyebrow font-mono text-sm tracking-[0.3em] uppercase text-green-main">
+            </h1>
+            <p className="hero-eyebrow font-mono text-sm tracking-[0.3em] uppercase text-green-main">
               Desarrollo de software
               <span className="hidden md:inline"> | </span>
               <br className="md:hidden" />
               AI Engineer
-            </h3>
+            </p>
           </div>
 
-          <h1 className="hero-tagline font-mono text-3xl md:text-[40px] font-medium text-white-smoke">
+          <p className="hero-tagline font-mono text-3xl md:text-[40px] font-medium text-white-smoke">
             <span className="md:hidden">Soluciones con IA</span>
             <span className="hidden md:inline">
               Soluciones con Inteligencia Artificial
             </span>
-          </h1>
+          </p>
         </div>
       </div>
     </section>

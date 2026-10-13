@@ -2,6 +2,7 @@
 // Si algo cambia (CV, usuario, correo), se cambia aquí y nada más.
 export const SITE = {
   name: "Julio César Aguilar",
+  url: "https://julio-aguilar.vercel.app",
   role: "AI Engineer · Full Stack Developer",
   email: "jcesar.a.15@gmail.com",
   cvUrl: "/CV_Julio_Aguilar.pdf",
