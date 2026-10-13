@@ -107,7 +107,7 @@ export default function ProjectsSection() {
                   <h3 className="font-sans font-bold text-3xl md:text-4xl text-white mb-4">
                     {project.title}
                   </h3>
-                  <p className="text-gray-strong text-base leading-relaxed mb-6 max-w-md">
+                  <p className="text-fog text-base leading-relaxed mb-6 max-w-md">
                     {project.description}
                   </p>
 
@@ -117,7 +117,7 @@ export default function ProjectsSection() {
                         <div className="font-sans font-bold text-2xl text-green-main">
                           {m.value}
                         </div>
-                        <div className="text-xs text-gray-strong">
+                        <div className="text-xs text-fog">
                           {m.label}
                         </div>
                       </div>
@@ -128,7 +128,7 @@ export default function ProjectsSection() {
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 rounded-full border border-white/15 text-[11px] font-mono text-gray-strong"
+                        className="px-3 py-1 rounded-full border border-white/15 text-[11px] font-mono text-fog"
                       >
                         {tech}
                       </span>

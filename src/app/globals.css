@@ -14,6 +14,10 @@
   --color-gray-medium: #9f9f9f;
   --color-gray-soft: #f1f1f1;
 
+  /* Texto sobre fondos oscuros */
+  --color-fog: #93a7aa; /* secundario: 7,7:1 */
+  --color-fog-dim: #7a8c8f; /* pequeño o terciario: 5,5:1 */
+
   --color-white-strong: #ffffff;
   --color-white-smoke: #fafafa;
   --color-white-shine: #fefefe;
@@ -67,13 +71,16 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --animate-orbit: orbit calc(var(--duration)*1s) linear infinite;
+  --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
   @keyframes orbit {
-  0% {
-    transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg))
+        translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
     }
-  100% {
-    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg + 360deg))
+        translateY(calc(var(--radius) * 1px))
+        rotate(calc((var(--angle) * -1deg) - 360deg));
     }
   }
 }

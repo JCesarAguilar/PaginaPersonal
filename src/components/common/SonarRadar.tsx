@@ -112,7 +112,7 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
                 overwrite: true,
               });
               gsap.to(el.label, {
-                color: "#5A6B66",
+                color: "#7a8c8f",
                 duration: 0.6,
                 overwrite: true,
               });
@@ -208,7 +208,7 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
                     blipRefs.current[i] = { dot: null, label: null };
                   blipRefs.current[i].label = el;
                 }}
-                className="text-[11px] font-mono text-[#5A6B66] whitespace-nowrap tracking-wide"
+                className="text-[11px] font-mono text-fog-dim whitespace-nowrap tracking-wide"
               >
                 {blip.label}
               </span>

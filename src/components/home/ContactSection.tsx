@@ -135,7 +135,7 @@ export default function ContactSection() {
               Hablemos.
             </h2>
 
-            <p className="contact-fade-in max-w-md text-gray-strong text-base md:text-lg leading-relaxed mb-10">
+            <p className="contact-fade-in max-w-md text-fog text-base md:text-lg leading-relaxed mb-10">
               Sistemas de IA, RAG en producción, productos full-stack. Si buscas
               a alguien que combine rigor operativo con ingeniería real,
               escríbeme.

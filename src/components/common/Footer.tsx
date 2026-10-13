@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="font-sans font-bold text-lg text-white-smoke">
             Julio César Aguilar
           </p>
-          <p className="font-mono text-xs text-gray-strong mt-1">
+          <p className="font-mono text-xs text-fog mt-1">
             AI Engineer · Full Stack Developer
           </p>
         </div>
@@ -20,7 +20,7 @@ export default function Footer() {
             <Link
               key={item.route}
               href={item.route}
-              className="font-mono text-xs text-gray-strong hover:text-green-main transition-colors"
+              className="font-mono text-xs text-fog hover:text-green-main transition-colors"
             >
               {item.name}
             </Link>
@@ -35,7 +35,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${link.name} (se abre en una pestaña nueva)`}
-              className="font-mono text-xs text-gray-strong hover:text-green-main transition-colors"
+              className="font-mono text-xs text-fog hover:text-green-main transition-colors"
             >
               {link.name}
             </a>
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="text-center font-mono text-[11px] text-gray-strong/60 mt-10">
+      <p className="text-center font-mono text-[11px] text-fog-dim mt-10">
         © {new Date().getFullYear()} {SITE.name}. Todos los derechos reservados.
       </p>
     </footer>
