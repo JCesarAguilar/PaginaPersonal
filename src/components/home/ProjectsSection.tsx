@@ -19,54 +19,81 @@ export default function ProjectsSection() {
     () => {
       const stageEls = gsap.utils.toArray<HTMLElement>(".proj-stage");
 
-      gsap.set(stageEls, { opacity: 0, y: 30, pointerEvents: "none" });
-      gsap.set(stageEls[0], { opacity: 1, y: 0, pointerEvents: "auto" });
-
       const boundaries = [0];
       PROJECTS.forEach((p) => {
         boundaries.push(boundaries[boundaries.length - 1] + (p.weight ?? 1));
       });
       const totalDuration = boundaries[boundaries.length - 1];
+      const last = PROJECTS.length - 1;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top top",
-          end: `+=${totalDuration * 100}%`,
-          scrub: 0.8,
-          pin: true,
-          anticipatePin: 1,
+      // Puntos donde la página "se acomoda" (0 = inicio, 1 = final del pin).
+      // Primero y último en los extremos; los del medio, en el centro de su tramo.
+      const restPoints = PROJECTS.map((_, i) => {
+        if (i === 0) return 0;
+        if (i === last) return 1;
+        return (boundaries[i] + boundaries[i + 1]) / 2 / totalDuration;
+      });
+
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        {
+          motion: "(prefers-reduced-motion: no-preference)",
+          reduce: "(prefers-reduced-motion: reduce)",
         },
-      });
+        (context) => {
+          const reduce = Boolean(context.conditions?.reduce);
+          const shift = reduce ? 0 : 12; // desplazamiento sutil en px
+          const fade = reduce ? 0.01 : 0.5; // duración del cruce
 
-      stageEls.forEach((el, i) => {
-        if (i === 0) return;
-        const prev = stageEls[i - 1];
-        const boundary = boundaries[i];
+          gsap.set(stageEls, { autoAlpha: 0, y: shift });
+          gsap.set(stageEls[0], { autoAlpha: 1, y: 0 });
 
-        tl.to(
-          prev,
-          { opacity: 0, y: -30, duration: 0.4, pointerEvents: "none" },
-          boundary - 0.5,
-        ).fromTo(
-          el,
-          { opacity: 0, y: 30, pointerEvents: "none" },
-          { opacity: 1, y: 0, duration: 0.4, pointerEvents: "auto" },
-          boundary - 0.3,
-        );
-      });
+          const tl = gsap.timeline({
+            defaults: { ease: "power1.inOut" },
+            scrollTrigger: {
+              trigger: container.current,
+              start: "top top",
+              end: `+=${totalDuration * 100}%`,
+              scrub: 0.6,
+              pin: true,
+              anticipatePin: 1,
+              snap: {
+                snapTo: restPoints,
+                duration: { min: 0.3, max: 0.7 },
+                delay: 0.1,
+                ease: "power2.inOut",
+              },
+            },
+          });
 
-      tl.to(".proj-progress-bar", { scaleY: 1, ease: "none" }, 0);
+          stageEls.forEach((el, i) => {
+            if (i === 0) return;
+            // El cruce queda centrado justo en el límite entre proyectos.
+            const at = boundaries[i] - fade / 2;
 
-      gsap.utils.toArray<HTMLElement>(".proj-counter").forEach((el, i) => {
-        if (i === 0) return;
-        const boundary = boundaries[i];
-        tl.to(
-          ".proj-counter-current",
-          { innerText: i + 1, duration: 0.1, snap: { innerText: 1 } },
-          boundary - 0.4,
-        );
-      });
+            tl.to(
+              stageEls[i - 1],
+              { autoAlpha: 0, y: -shift, duration: fade },
+              at,
+            )
+              .to(el, { autoAlpha: 1, y: 0, duration: fade }, at)
+              .set(
+                ".proj-counter-current",
+                { innerText: i + 1 },
+                boundaries[i],
+              );
+          });
+
+          // La barra dura TODO el timeline: así el timeline mide lo mismo
+          // que el scroll y el último proyecto recibe su "weight" completo.
+          tl.to(
+            ".proj-progress-bar",
+            { scaleY: 1, ease: "none", duration: totalDuration },
+            0,
+          );
+        },
+      );
     },
     { scope: container },
   );
@@ -98,7 +125,7 @@ export default function ProjectsSection() {
             {PROJECTS.map((project) => (
               <div
                 key={project.title}
-                className="proj-stage proj-counter absolute inset-0 grid md:grid-cols-2 gap-10 items-center"
+                className="proj-stage absolute inset-0 grid md:grid-cols-2 gap-10 items-center"
               >
                 <div>
                   <p className="font-mono text-xs tracking-[0.25em] uppercase text-green-main mb-4">
@@ -117,9 +144,7 @@ export default function ProjectsSection() {
                         <div className="font-sans font-bold text-2xl text-green-main">
                           {m.value}
                         </div>
-                        <div className="text-xs text-fog">
-                          {m.label}
-                        </div>
+                        <div className="text-xs text-fog">{m.label}</div>
                       </div>
                     ))}
                   </div>
