@@ -18,7 +18,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 const description =
-  "AI Engineer y desarrollador full-stack en Lima. Construyo sistemas RAG, agentes con LLMs y productos web en producción. Antes, 16 años en la Marina del Perú.";
+  "AI Engineer y desarrollador full-stack en Lima. Construyo sistemas RAG, agentes con LLMs y productos web en producción, como RedLegal.pe.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

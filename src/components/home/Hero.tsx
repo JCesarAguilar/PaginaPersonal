@@ -10,7 +10,7 @@ import { PATHROUTES } from "@/src/helpers/publicNavItems";
 const PROOF = [
   { value: "+120", label: "usuarios en 48 h en RedLegal.pe" },
   { value: "100%", label: "respuestas con fuente citada en el RAG legal" },
-  { value: "16 años", label: "en la Marina de Guerra del Perú" },
+  { value: "+5", label: "aplicaciones de IA y web desplegadas" },
 ];
 
 export default function Hero() {
@@ -28,7 +28,6 @@ export default function Hero() {
             { opacity: 0, y: 40, duration: 0.9, stagger: 0.12 },
             "-=0.3",
           )
-          .from(".hero-tagline", { opacity: 0, y: 20, duration: 0.7 }, "-=0.4")
           .from(".hero-cta", { opacity: 0, y: 12, duration: 0.5 }, "-=0.3")
           .from(".hero-proof", { opacity: 0, y: 12, duration: 0.5 }, "-=0.2");
       });
