@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import TechBadge from "@/src/components/common/TechBadge";
 import { STACK_CATEGORIES, type StackCategory } from "@/src/data/stack";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
+import { useMediaQuery } from "@/src/hooks/useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,18 +21,7 @@ function chunkPairs(items: StackCategory[]): StackCategory[][] {
 
 export default function StackSection() {
   const container = useRef<HTMLElement>(null);
-  const [isDesktop, setIsDesktop] = useState(() =>
-    typeof window !== "undefined"
-      ? window.matchMedia("(min-width: 768px)").matches
-      : false,
-  );
-
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)");
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // En desktop: pares de 2 categorías por pantalla. En mobile: 1 por pantalla.
   const groups: StackCategory[][] = isDesktop
@@ -98,7 +88,7 @@ export default function StackSection() {
   );
 
   return (
-    <div id={toSectionId(PATHROUTES.SOLUTIONS)}>
+    <div id={toSectionId(PATHROUTES.STACK)}>
       <section
         ref={container}
         className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center px-6 md:px-20"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -26,16 +26,24 @@ const STACK_BLIPS: StackBlip[] = [
   { label: "RAG", angle: 340, radius: 245 },
 ];
 
-// Ancho del "haz" del sonar. Debe calzar con el conic-gradient (60deg) de abajo.
 const SWEEP_WIDTH = 60;
-// El conic-gradient arranca en la parte de ARRIBA (12 en punto) y gira en
-// sentido horario. Nuestros ángulos de blip usan convención matemática
-// (0deg = derecha, sentido horario porque el eje Y va hacia abajo en pantalla).
-// Este offset convierte un ángulo de blip a la misma referencia que el gradient.
 const ANGLE_OFFSET = 90;
+
+// Tamaño de diseño de referencia (coincide con w-170/h-170 = 170*4 = 680px).
+// Todos los "radius" de arriba fueron pensados para un círculo de este tamaño.
+const DESIGN_SIZE = 680;
 
 function normalize(angle: number): number {
   return ((angle % 360) + 360) % 360;
+}
+
+function getScale(): number {
+  return Math.min(DESIGN_SIZE, window.innerWidth * 1.2) / DESIGN_SIZE;
+}
+
+function subscribeResize(onChange: () => void) {
+  window.addEventListener("resize", onChange);
+  return () => window.removeEventListener("resize", onChange);
 }
 
 interface SonarRadarProps {
@@ -47,6 +55,15 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const blipRefs = useRef<BlipElements[]>([]);
   const activeState = useRef<boolean[]>(STACK_BLIPS.map(() => false));
+
+  // Factor de escala: 1 en desktop (círculo a tamaño completo),
+  // menor a 1 cuando el círculo se achica por max-w-[120vw] en mobile.
+  // En el servidor vale 1; React lo corrige al hidratar sin error.
+  const scale = useSyncExternalStore(
+    subscribeResize,
+    getScale,
+    () => 1,
+  );
 
   useGSAP(
     () => {
@@ -138,7 +155,7 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
       ref={rootRef}
       className={`radar-wrap pointer-events-none flex items-center justify-end ${className}`}
     >
-      <div className="relative w-170 h-170 max-w-[90vw] max-h-[90vw]">
+      <div className="relative w-170 h-170 max-w-[120vw] max-h-[120vw]">
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
@@ -162,8 +179,11 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
 
         {STACK_BLIPS.map((blip, i) => {
           const rad = (blip.angle * Math.PI) / 180;
-          const x = Math.cos(rad) * blip.radius;
-          const y = Math.sin(rad) * blip.radius;
+          // El radius se escala por "scale" para que los puntos se acerquen
+          // proporcionalmente al centro cuando el círculo se achica.
+          const scaledRadius = blip.radius * scale;
+          const x = Math.cos(rad) * scaledRadius;
+          const y = Math.sin(rad) * scaledRadius;
           return (
             <div
               key={blip.label}

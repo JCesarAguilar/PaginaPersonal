@@ -169,13 +169,13 @@ export default function AboutSection() {
                 key={i}
                 className="pin-stage absolute inset-0 flex flex-col justify-center"
               >
-                <div className="bg-black-background  justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-3">
+                <div className="bg-black-background  justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-4">
                   <p className="font-mono text-xs tracking-[0.3em] uppercase text-green-main ">
                     {stage.eyebrow}
                   </p>
                 </div>
 
-                <h2 className="font-sans font-bold text-3xl md:text-5xl text-black-medium leading-[1.1] mb-4">
+                <h2 className="font-sans font-bold text-[30px] md:text-5xl text-black-medium leading-[1.1] mb-4">
                   {stage.headline}
                 </h2>
                 <p className="max-w-xl text-gray-strong text-base md:text-lg leading-relaxed">

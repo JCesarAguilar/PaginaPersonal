@@ -2,7 +2,7 @@ export enum PATHROUTES {
   HOME = "/",
   ABOUT = "#sobre-mi",
   PROJECTS = "#proyectos",
-  SOLUTIONS = "#servicios",
+  STACK = "#stack",
   CONTACT = "#contacto",
 }
 
@@ -20,8 +20,8 @@ export const publicNavItems = [
     route: PATHROUTES.PROJECTS,
   },
   {
-    name: "Soluciones",
-    route: PATHROUTES.SOLUTIONS,
+    name: "Stack",
+    route: PATHROUTES.STACK,
   },
 
   {

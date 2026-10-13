@@ -26,24 +26,32 @@ export default function Hero() {
   return (
     <section
       ref={container}
-      className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center justify-start px-6 md:px-20"
+      className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center justify-center md:justify-start px-6 md:px-20"
     >
-      <SonarRadar className="absolute top-30 right-20" />
+      <SonarRadar className="absolute right-1/2 translate-x-1/2 md:top-30 md:right-20 md:translate-x-0" />
 
       {/* Contenido */}
-      <div className="relative z-10 text-left">
-        <div className="font-sans leading-[0.95] gap-7 flex flex-col">
-          <div className="flex flex-col gap-4">
-            <h2 className="hero-title-line font-mono text-3xl md:text-[35px] font-bold text-[#E8ECEA]">
-              ¡Hola! Me llamo <span className="text-green-main">Julio</span>.
+      <div className="relative z-10 text-center md:text-left">
+        <div className="font-sans leading-[0.95] gap-4 md:gap-7 flex flex-col">
+          <div className="flex flex-col gap-4 items-center md:items-start">
+            <h2 className="hero-title-line font-mono text-3xl md:text-[35px] font-bold text-white-smoke">
+              ¡Hola!
+              <br className="md:hidden" /> Me llamo{" "}
+              <span className="text-green-main">Julio</span>.
             </h2>
             <h3 className="hero-eyebrow font-mono text-sm tracking-[0.3em] uppercase text-green-main">
-              Desarrollo de software | AI Engineer
+              Desarrollo de software
+              <span className="hidden md:inline"> | </span>
+              <br className="md:hidden" />
+              AI Engineer
             </h3>
           </div>
 
-          <h1 className="hero-tagline font-mono text-3xl md:text-[40px] font-medium text-[#E8ECEA]">
-            Soluciones con Inteligencia Artificial
+          <h1 className="hero-tagline font-mono text-3xl md:text-[40px] font-medium text-white-smoke">
+            <span className="md:hidden">Soluciones con IA</span>
+            <span className="hidden md:inline">
+              Soluciones con Inteligencia Artificial
+            </span>
           </h1>
         </div>
       </div>

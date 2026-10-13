@@ -5,6 +5,8 @@ import NavBar from "../components/common/NavBar/NavBar";
 import AboutSection from "../components/home/AboutSection";
 import ProjectsSection from "../components/home/ProjectsSection";
 import StackSection from "../components/home/StackSection";
+import ContactSection from "../components/home/ContactSection";
+import Footer from "../components/common/Footer";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <AboutSection />
       <ProjectsSection />
       <StackSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 }
