@@ -5,7 +5,7 @@ import Image from "next/image";
 
 interface TechBadgeProps {
   name: string;
-  iconSrc?: string; // ruta local opcional (ej: "/logos/langchain.svg")
+  iconSrc: string; // ruta local en /public
   size?: "sm" | "lg";
 }
 
@@ -20,7 +20,6 @@ export default function TechBadge({
   size = "sm",
 }: TechBadgeProps) {
   const [broken, setBroken] = useState(false);
-  const src = iconSrc ?? `https://cdn.simpleicons.org/${name}/${name}`;
   const s = SIZES[size];
 
   return (
@@ -36,8 +35,8 @@ export default function TechBadge({
           className={`${s.box} rounded-xl bg-white-smoke border border-black-medium/10 flex items-center justify-center`}
         >
           <Image
-            src={src}
-            alt={name}
+            src={iconSrc}
+            alt=""
             width={s.icon}
             height={s.icon}
             unoptimized
