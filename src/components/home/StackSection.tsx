@@ -33,57 +33,80 @@ export default function StackSection() {
       const stageEls = gsap.utils.toArray<HTMLElement>(".stack-stage");
       if (stageEls.length === 0) return;
 
-      gsap.set(stageEls, { opacity: 0, y: 30 });
-      gsap.set(stageEls[0], { opacity: 1, y: 0 });
+      // Cada grupo pesa 1: boundaries = [0, 1, 2, ...]
+      const boundaries = groups.map((_, i) => i);
+      const totalDuration = groups.length;
+      const last = groups.length - 1;
 
-      const boundaries = [0];
-      groups.forEach(() => {
-        boundaries.push(boundaries[boundaries.length - 1] + 1);
+      // Puntos donde la página "se acomoda": primero al inicio, último al
+      // final, los del medio en el centro de su tramo.
+      const restPoints = groups.map((_, i) => {
+        if (i === 0) return 0;
+        if (i === last) return 1;
+        return (i + 0.5) / totalDuration;
       });
-      const totalDuration = boundaries[boundaries.length - 1];
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top top",
-          end: `+=${totalDuration * 100}%`,
-          scrub: 0.8,
-          pin: true,
-          anticipatePin: 1,
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        {
+          motion: "(prefers-reduced-motion: no-preference)",
+          reduce: "(prefers-reduced-motion: reduce)",
         },
-      });
+        (context) => {
+          const reduce = Boolean(context.conditions?.reduce);
+          const shift = reduce ? 0 : 12;
+          const fade = reduce ? 0.01 : 0.5;
 
-      stageEls.forEach((el, i) => {
-        if (i === 0) return;
-        const prev = stageEls[i - 1];
-        const boundary = boundaries[i];
+          gsap.set(stageEls, { autoAlpha: 0, y: shift });
+          gsap.set(stageEls[0], { autoAlpha: 1, y: 0 });
 
-        tl.to(
-          prev,
-          { opacity: 0, y: -30, duration: 0.4 },
-          boundary - 0.5,
-        ).fromTo(
-          el,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.4 },
-          boundary - 0.3,
-        );
-      });
+          const tl = gsap.timeline({
+            defaults: { ease: "power1.inOut" },
+            scrollTrigger: {
+              trigger: container.current,
+              start: "top top",
+              end: `+=${totalDuration * 100}%`,
+              scrub: 0.6,
+              pin: true,
+              anticipatePin: 1,
+              snap: {
+                snapTo: restPoints,
+                duration: { min: 0.3, max: 0.7 },
+                delay: 0.1,
+                ease: "power2.inOut",
+              },
+            },
+          });
 
-      tl.to(".stack-progress-bar", { scaleY: 1, ease: "none" }, 0);
+          stageEls.forEach((el, i) => {
+            if (i === 0) return;
+            const at = boundaries[i] - fade / 2;
 
-      gsap.utils.toArray<HTMLElement>(".stack-counter").forEach((el, i) => {
-        if (i === 0) return;
-        const boundary = boundaries[i];
-        tl.to(
-          ".stack-counter-current",
-          { innerText: i + 1, duration: 0.1, snap: { innerText: 1 } },
-          boundary - 0.4,
-        );
-      });
+            tl.to(
+              stageEls[i - 1],
+              { autoAlpha: 0, y: -shift, duration: fade },
+              at,
+            )
+              .to(el, { autoAlpha: 1, y: 0, duration: fade }, at)
+              .set(
+                ".stack-counter-current",
+                { innerText: i + 1 },
+                boundaries[i],
+              );
+          });
+
+          // La barra dura TODO el timeline: cada grupo recibe su tramo completo.
+          tl.to(
+            ".stack-progress-bar",
+            { scaleY: 1, ease: "none", duration: totalDuration },
+            0,
+          );
+        },
+      );
     },
-    // Se reconstruye el timeline completo cada vez que cambia la cantidad
-    // de "pantallas" (al cruzar el breakpoint desktop/mobile).
+    // Se reconstruye todo cuando cambia la cantidad de pantallas
+    // (al cruzar el breakpoint desktop/mobile).
     { scope: container, dependencies: [groups.length], revertOnUpdate: true },
   );
 
@@ -97,7 +120,7 @@ export default function StackSection() {
           <span className="font-mono text-xs text-green-main">
             <span className="stack-counter-current">1</span>/{groups.length}
           </span>
-          <div className="relative w-px h-32 bg-black-medium/10">
+          <div className="relative w-px h-32 bg-white/10">
             <div
               className="stack-progress-bar absolute top-0 left-0 w-full h-full bg-green-main origin-top"
               style={{ transform: "scaleY(0)" }}
@@ -114,7 +137,7 @@ export default function StackSection() {
             {groups.map((group) => (
               <div
                 key={group.map((c) => c.label).join("-")}
-                className="stack-stage stack-counter absolute inset-0 grid md:grid-cols-2 gap-10"
+                className="stack-stage absolute inset-0 grid md:grid-cols-2 gap-10"
               >
                 {group.map((cat) => (
                   <div

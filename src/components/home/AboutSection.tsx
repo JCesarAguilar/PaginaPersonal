@@ -56,15 +56,8 @@ export default function AboutSection() {
       const stageEls = gsap.utils.toArray<HTMLElement>(".pin-stage");
       const cardEls = gsap.utils.toArray<HTMLElement>(".pin-card");
 
-      gsap.set(stageEls, { opacity: 0, y: 30 });
-      gsap.set(stageEls[0], { opacity: 1, y: 0 });
-      gsap.set(cardEls, { opacity: 0, scale: 0.94 });
-      gsap.set(cardEls[0], { opacity: 1, scale: 1 });
-
-      // Posiciones acumuladas según el "weight" de cada etapa.
-      // boundaries[i] = dónde empieza la etapa i en el timeline.
-      // Con weight=1.8 en la primera, esa etapa ocupa 1.8x más "tiempo"
-      // que una etapa normal (weight=1) → más scroll físico para pasarla.
+      // boundaries[i] = dónde empieza la etapa i en el timeline,
+      // según el "weight" de cada una.
       const boundaries = [0];
       STAGES.forEach((stage) => {
         boundaries.push(
@@ -72,79 +65,101 @@ export default function AboutSection() {
         );
       });
       const totalDuration = boundaries[boundaries.length - 1];
+      const last = STAGES.length - 1;
 
-      const stageWindows = STAGES.map((_, i) => ({
-        start: i === 0 ? 0 : boundaries[i] + 0.1,
-        end: boundaries[i + 1] - 0.5,
-      }));
+      const mm = gsap.matchMedia();
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top top",
-          // El scroll total ahora es proporcional al peso acumulado,
-          // no solo a la cantidad de etapas.
-          end: `+=${totalDuration * 100}%`,
-          scrub: 0.8,
-          pin: true,
-          anticipatePin: 1,
+      mm.add(
+        {
+          motion: "(prefers-reduced-motion: no-preference)",
+          reduce: "(prefers-reduced-motion: reduce)",
         },
-      });
+        (context) => {
+          const reduce = Boolean(context.conditions?.reduce);
+          const shift = reduce ? 0 : 12; // desplazamiento sutil del texto
+          const cardScale = reduce ? 1 : 0.97; // la tarjeta casi no se encoge
+          const fade = reduce ? 0.01 : 0.5; // duración del cruce
 
-      stageEls.forEach((el, i) => {
-        if (i === 0) return;
-        const prevText = stageEls[i - 1];
-        const prevCard = cardEls[i - 1];
-        const nextCard = cardEls[i];
-        const boundary = boundaries[i];
+          // Tramo en el que cada etapa está completamente visible.
+          const stageWindows = STAGES.map((_, i) => ({
+            start: i === 0 ? 0 : boundaries[i] + fade / 2,
+            end: i === last ? totalDuration : boundaries[i + 1] - fade / 2,
+          }));
 
-        tl.to(prevText, { opacity: 0, y: -30, duration: 0.4 }, boundary - 0.5)
-          .to(
-            prevCard,
-            { opacity: 0, scale: 0.94, duration: 0.4 },
-            boundary - 0.5,
-          )
-          .fromTo(
-            el,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.4 },
-            boundary - 0.3,
-          )
-          .fromTo(
-            nextCard,
-            { opacity: 0, scale: 0.94 },
-            { opacity: 1, scale: 1, duration: 0.4 },
-            boundary - 0.3,
+          gsap.set(stageEls, { autoAlpha: 0, y: shift });
+          gsap.set(stageEls[0], { autoAlpha: 1, y: 0 });
+          gsap.set(cardEls, { autoAlpha: 0, scale: cardScale });
+          gsap.set(cardEls[0], { autoAlpha: 1, scale: 1 });
+
+          const tl = gsap.timeline({
+            defaults: { ease: "power1.inOut" },
+            scrollTrigger: {
+              trigger: container.current,
+              start: "top top",
+              end: `+=${totalDuration * 100}%`,
+              scrub: 0.6,
+              pin: true,
+              anticipatePin: 1,
+            },
+          });
+
+          // Cruce de texto y tarjeta, todo a la vez, centrado en el límite.
+          stageEls.forEach((el, i) => {
+            if (i === 0) return;
+            const at = boundaries[i] - fade / 2;
+
+            tl.to(
+              stageEls[i - 1],
+              { autoAlpha: 0, y: -shift, duration: fade },
+              at,
+            )
+              .to(
+                cardEls[i - 1],
+                { autoAlpha: 0, scale: cardScale, duration: fade },
+                at,
+              )
+              .to(el, { autoAlpha: 1, y: 0, duration: fade }, at)
+              .to(cardEls[i], { autoAlpha: 1, scale: 1, duration: fade }, at);
+          });
+
+          // La barra dura TODO el timeline: así cada etapa recibe su "weight".
+          tl.to(
+            ".pin-progress-bar",
+            { scaleY: 1, ease: "none", duration: totalDuration },
+            0,
           );
-      });
 
-      tl.to(".pin-progress-bar", { scaleY: 1, ease: "none" }, 0);
+          // Carrusel de fotos dentro de una etapa (misma lógica que tenías).
+          STAGES.forEach((stage, stageIndex) => {
+            if (stage.images.length < 2) return;
 
-      STAGES.forEach((stage, stageIndex) => {
-        if (stage.images.length < 2) return;
+            const imgEls = gsap.utils.toArray<HTMLElement>(
+              `.pin-card-img-${stageIndex}`,
+            );
+            const dotEls = gsap.utils.toArray<HTMLElement>(
+              `.pin-card-dot-${stageIndex}`,
+            );
+            const { start, end } = stageWindows[stageIndex];
+            const step = (end - start) / stage.images.length;
 
-        const imgEls = gsap.utils.toArray<HTMLElement>(
-          `.pin-card-img-${stageIndex}`,
-        );
-        const dotEls = gsap.utils.toArray<HTMLElement>(
-          `.pin-card-dot-${stageIndex}`,
-        );
-        const { start, end } = stageWindows[stageIndex];
-        const span = end - start;
-        const step = span / stage.images.length;
+            gsap.set(imgEls, { opacity: 0 });
+            gsap.set(imgEls[0], { opacity: 1 });
+            gsap.set(dotEls[0], { opacity: 1 });
 
-        gsap.set(imgEls, { opacity: 0 });
-        gsap.set(imgEls[0], { opacity: 1 });
-        gsap.set(dotEls[0], { opacity: 1 });
-
-        for (let k = 0; k < imgEls.length - 1; k++) {
-          const swapAt = start + step * (k + 1) - step * 0.3;
-          tl.to(imgEls[k], { opacity: 0, duration: step * 0.6 }, swapAt)
-            .to(imgEls[k + 1], { opacity: 1, duration: step * 0.6 }, swapAt)
-            .to(dotEls[k], { opacity: 0.4, duration: step * 0.3 }, swapAt)
-            .to(dotEls[k + 1], { opacity: 1, duration: step * 0.3 }, swapAt);
-        }
-      });
+            for (let k = 0; k < imgEls.length - 1; k++) {
+              const swapAt = start + step * (k + 1) - step * 0.3;
+              tl.to(imgEls[k], { opacity: 0, duration: step * 0.6 }, swapAt)
+                .to(imgEls[k + 1], { opacity: 1, duration: step * 0.6 }, swapAt)
+                .to(dotEls[k], { opacity: 0.4, duration: step * 0.3 }, swapAt)
+                .to(
+                  dotEls[k + 1],
+                  { opacity: 1, duration: step * 0.3 },
+                  swapAt,
+                );
+            }
+          });
+        },
+      );
     },
     { scope: container },
   );
