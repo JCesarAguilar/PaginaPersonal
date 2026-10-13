@@ -171,5 +171,15 @@ body {
   }
   html {
     @apply font-sans;
+    /* Al saltar a un #ancla, deja libre el alto de la barra fija */
+    scroll-padding-top: 5rem;
+  }
+
+  /* Desplazamiento suave al hacer clic en el menú,
+     salvo que el usuario haya pedido menos movimiento */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }
