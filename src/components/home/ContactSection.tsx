@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { SITE } from "@/src/data/site";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -141,7 +142,7 @@ export default function ContactSection() {
             </p>
 
             <a
-              href="mailto:jcesar.a.15@gmail.com"
+              href={`mailto:${SITE.email}`}
               className="contact-fade-in inline-flex items-center gap-2 px-8 py-4 rounded-full bg-green-main text-black-background font-mono text-sm font-bold hover:opacity-90 transition-opacity"
             >
               Escríbeme →

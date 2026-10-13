@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { publicNavItems } from "@/src/helpers/publicNavItems";
+import { SITE } from "@/src/data/site";
 
 export default function HamburguerMenu() {
   const [open, setOpen] = useState(false);
@@ -58,7 +59,7 @@ export default function HamburguerMenu() {
         </nav>
 
         <a
-          href="/CV_Julio_Aguilar.pdf"
+          href={SITE.cvUrl}
           download
           onClick={close}
           className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-main text-black-background font-mono text-sm font-bold"

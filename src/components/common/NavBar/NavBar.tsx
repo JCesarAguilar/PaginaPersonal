@@ -3,6 +3,7 @@
 import DownloadCVButton from "./DownloadCVButton";
 import NavItems from "./NavItems";
 import HamburguerMenu from "./HamburguerMenu";
+import { SITE } from "@/src/data/site";
 
 export default function NavBar() {
   return (
@@ -10,7 +11,7 @@ export default function NavBar() {
       {/* Nav de escritorio: centrado en el espacio disponible */}
       <div className="hidden md:flex gap-7 items-center mx-auto">
         <NavItems />
-        <DownloadCVButton label="Descargar CV" href="/CV_Julio_Aguilar.pdf" />
+        <DownloadCVButton label="Descargar CV" href={SITE.cvUrl} />
       </div>
 
       {/* Hamburger: solo en mobile, pegado a la derecha */}
