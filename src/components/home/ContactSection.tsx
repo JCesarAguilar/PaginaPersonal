@@ -4,81 +4,40 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { ArrowUpRight, Briefcase, Code, Download, Mail } from "lucide-react";
 import { SITE } from "@/src/data/site";
+import ContactForm from "./ContactForm";
+import CopyEmailButton from "./CopyEmailButton";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Star {
-  id: number;
-  top: number;
-  left: number;
-  size: number;
-  delay: number;
-}
+// Ícono para cada red de SITE.social (lucide ya no incluye logos de marcas).
+const SOCIAL_ICONS = { LinkedIn: Briefcase, GitHub: Code } as const;
 
-// Generador pseudoaleatorio con semilla fija: produce las mismas estrellas
-// en el servidor y en el navegador, así no hay error de hidratación.
-function seeded(seed: number) {
-  return () => {
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-const rand = seeded(42);
-const STARS: Star[] = Array.from({ length: 80 }, (_, i) => ({
-  id: i,
-  top: rand() * 100,
-  left: rand() * 100,
-  size: 0.5 + rand() * 1.8,
-  delay: rand() * 4,
-}));
+const CHANNEL =
+  "group flex items-center gap-4 rounded-2xl border border-white/10 p-4 transition-colors hover:border-green-main/50 hover:bg-white/[0.02]";
+const ICON_BOX =
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.04] text-white-smoke";
 
 export default function ContactSection() {
   const container = useRef<HTMLElement>(null);
-  const skyRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.to(skyRef.current, {
-          scale: 1.08,
-          duration: 18,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-
-        gsap.utils.toArray<HTMLElement>(".contact-star").forEach((star) => {
-          gsap.to(star, {
-            opacity: 0.15,
-            duration: 1.5 + Math.random() * 2,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            delay: Number(star.dataset.delay),
-          });
-        });
-
-        gsap.from(".contact-arch", {
-          scale: 0.94,
-          opacity: 0,
-          duration: 1.1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: container.current, start: "top 75%" },
-        });
-
         gsap.from(".contact-fade-in", {
           opacity: 0,
-          y: 30,
-          duration: 0.9,
-          stagger: 0.15,
+          y: 24,
+          duration: 0.8,
+          stagger: 0.12,
           ease: "power3.out",
-          scrollTrigger: { trigger: container.current, start: "top 60%" },
+          scrollTrigger: {
+            trigger: container.current,
+            start: "top 70%",
+            once: true,
+          },
         });
       });
     },
@@ -86,73 +45,129 @@ export default function ContactSection() {
   );
 
   return (
-    <div id={toSectionId(PATHROUTES.CONTACT)}>
-      <section
-        ref={container}
-        className="relative w-full bg-black-background py-20 md:py-28 px-4 md:px-10 flex items-center justify-center"
+    <section
+      id={toSectionId(PATHROUTES.CONTACT)}
+      ref={container}
+      className="relative w-full overflow-hidden border-t border-white/10 bg-black-background px-6 py-24 md:px-20 md:py-32"
+    >
+      {/* Anillos de sonar decorativos: el mismo motivo del hero, muy tenue */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 640 640"
+        fill="none"
+        stroke="currentColor"
+        className="pointer-events-none absolute -right-48 -top-48 h-160 w-160 text-green-main/8"
       >
-        <div
-          className="contact-arch relative w-full max-w-5xl h-[75vh] md:h-[80vh] overflow-hidden border border-green-main/30"
-          style={{ borderRadius: "50% 50% 0 0 / 18% 18% 0 0" }}
-        >
-          {/* Cielo con Ken Burns */}
-          <div
-            ref={skyRef}
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at 50% 30%, #0F2A26 0%, #061210 45%, #020504 100%)",
-            }}
-          >
-            {STARS.map((s) => (
-              <span
-                key={s.id}
-                className="contact-star absolute rounded-full bg-white-smoke"
-                data-delay={s.delay}
-                style={{
-                  top: `${s.top}%`,
-                  left: `${s.left}%`,
-                  width: s.size,
-                  height: s.size,
-                }}
-              />
-            ))}
-          </div>
+        <circle cx="320" cy="320" r="80" />
+        <circle cx="320" cy="320" r="160" />
+        <circle cx="320" cy="320" r="240" />
+        <circle cx="320" cy="320" r="318" />
+      </svg>
 
-          {/* Viñeta */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(10,14,15,0.7) 0%, transparent 20%, transparent 75%, rgba(10,14,15,0.9) 100%)",
-            }}
-          />
-
-          {/* Contenido */}
-          <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-            <p className="contact-fade-in font-mono text-xs tracking-[0.3em] uppercase text-green-main mb-6">
-              ¿Trabajamos juntos?
+      <div className="relative mx-auto max-w-6xl">
+        {/* Encabezado */}
+        <header className="contact-fade-in flex flex-col gap-6 border-b border-white/10 pb-12 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-4">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-green-main">
+              Contacto
             </p>
-
-            <h2 className="contact-fade-in font-sans font-bold text-6xl md:text-8xl text-white-smoke leading-none mb-8">
+            <h2 className="font-sans text-5xl font-bold leading-none text-white-smoke md:text-7xl">
               Hablemos.
             </h2>
+          </div>
+          <p className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/3 px-4 py-2 font-mono text-xs text-white-smoke">
+            <span className="h-2 w-2 rounded-full bg-green-main shadow-[0_0_10px_#3dffb0]" />
+            Disponible · respondo en menos de 24 h
+          </p>
+        </header>
 
-            <p className="contact-fade-in max-w-md text-fog text-base md:text-lg leading-relaxed mb-10">
-              Sistemas de IA, RAG en producción, productos full-stack. Si buscas
-              a alguien que combine rigor operativo con ingeniería real,
-              escríbeme.
+        <div className="mt-12 grid gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14">
+          {/* Canales directos */}
+          <div className="contact-fade-in flex min-w-0 flex-col gap-3">
+            <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.16em] text-fog-dim">
+              Canales directos
             </p>
 
-            <a
-              href={`mailto:${SITE.email}`}
-              className="contact-fade-in inline-flex items-center gap-2 px-8 py-4 rounded-full bg-green-main text-black-background font-mono text-sm font-bold hover:opacity-90 transition-opacity"
-            >
-              Escríbeme →
-            </a>
+            {/* Correo: el canal principal, destacado */}
+            <div className="flex flex-col gap-4 rounded-2xl border border-green-main/30 bg-[#0e1416] p-5">
+              <div className="flex items-center gap-4">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-main/10 text-green-main">
+                  <Mail className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs text-fog">Correo</p>
+                  <p className="break-all font-mono text-sm text-white-smoke select-all md:text-base">
+                    {SITE.email}
+                  </p>
+                </div>
+              </div>
+              <div className="self-start">
+                <CopyEmailButton />
+              </div>
+            </div>
+
+            <ul className="flex flex-col gap-3">
+              {SITE.social.map((link) => {
+                const Icon = SOCIAL_ICONS[link.name];
+                return (
+                  <li key={link.name}>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={CHANNEL}
+                    >
+                      <span className={ICON_BOX}>
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-white-smoke">
+                          {link.name}
+                        </span>
+                        <span className="block truncate font-mono text-xs text-fog">
+                          {link.url.replace(/^https:\/\/(www\.)?/, "")}
+                        </span>
+                      </span>
+                      <ArrowUpRight
+                        className="h-4 w-4 text-fog transition-colors group-hover:text-green-main"
+                        aria-hidden="true"
+                      />
+                      <span className="sr-only">
+                        (se abre en una pestaña nueva)
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+
+              <li>
+                <a href={SITE.cvUrl} download className={CHANNEL}>
+                  <span className={ICON_BOX}>
+                    <Download className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-semibold text-white-smoke">
+                      Currículum
+                    </span>
+                    <span className="block font-mono text-xs text-fog">
+                      Descargar PDF
+                    </span>
+                  </span>
+                </a>
+              </li>
+            </ul>
+
+            <p className="mt-2 font-mono text-xs text-fog-dim">
+              Lima, Perú · UTC−5
+            </p>
+          </div>
+
+          {/* Formulario */}
+          <div className="contact-fade-in min-w-0">
+            <ContactForm />
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
