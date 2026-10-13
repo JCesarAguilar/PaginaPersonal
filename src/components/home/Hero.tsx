@@ -4,6 +4,14 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SonarRadar from "../common/SonarRadar";
+import { PATHROUTES } from "@/src/helpers/publicNavItems";
+
+// Pruebas concretas: un número + qué significa. Actualízalas cuando cambien.
+const PROOF = [
+  { value: "+120", label: "usuarios en 48 h en RedLegal.pe" },
+  { value: "100%", label: "respuestas con fuente citada en el RAG legal" },
+  { value: "16 años", label: "en la Marina de Guerra del Perú" },
+];
 
 export default function Hero() {
   const container = useRef<HTMLElement>(null);
@@ -20,7 +28,9 @@ export default function Hero() {
             { opacity: 0, y: 40, duration: 0.9, stagger: 0.12 },
             "-=0.3",
           )
-          .from(".hero-tagline", { opacity: 0, y: 20, duration: 0.7 }, "-=0.4");
+          .from(".hero-tagline", { opacity: 0, y: 20, duration: 0.7 }, "-=0.4")
+          .from(".hero-cta", { opacity: 0, y: 12, duration: 0.5 }, "-=0.3")
+          .from(".hero-proof", { opacity: 0, y: 12, duration: 0.5 }, "-=0.2");
       });
     },
     { scope: container },
@@ -50,12 +60,33 @@ export default function Hero() {
             </p>
           </div>
 
-          <p className="hero-tagline font-mono text-3xl md:text-[40px] font-medium text-white-smoke">
-            <span className="md:hidden">Soluciones con IA</span>
-            <span className="hidden md:inline">
-              Soluciones con Inteligencia Artificial
-            </span>
-          </p>
+          <div className="hero-cta flex flex-wrap justify-center md:justify-start gap-3">
+            <a
+              href={PATHROUTES.PROJECTS}
+              className="inline-flex items-center gap-2 h-12 px-6 rounded-full bg-green-main text-black-background font-mono text-sm font-bold hover:opacity-90 transition-opacity"
+            >
+              Ver proyectos ↓
+            </a>
+            <a
+              href={PATHROUTES.CONTACT}
+              className="inline-flex items-center h-12 px-6 rounded-full border border-white/20 text-white-smoke font-mono text-sm font-bold hover:border-green-main transition-colors"
+            >
+              Hablemos
+            </a>
+          </div>
+
+          <dl className="hero-proof grid grid-cols-3 gap-4 md:gap-10 max-w-xl mx-auto md:mx-0 pt-6 border-t border-white/10">
+            {PROOF.map((item) => (
+              <div key={item.label} className="flex flex-col gap-1">
+                <dt className="order-2 text-xs text-fog leading-snug">
+                  {item.label}
+                </dt>
+                <dd className="order-1 font-sans font-bold text-2xl md:text-3xl text-white-smoke leading-none">
+                  {item.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
