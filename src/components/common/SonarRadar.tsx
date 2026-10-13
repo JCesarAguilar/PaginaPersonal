@@ -67,84 +67,87 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
 
   useGSAP(
     () => {
-      gsap.to(sweepRef.current, {
-        rotate: 360,
-        duration: 8,
-        repeat: -1,
-        ease: "none",
-        transformOrigin: "50% 50%",
-        onUpdate: function () {
-          const rotation = normalize(
-            Number(gsap.getProperty(sweepRef.current, "rotate")),
-          );
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.to(sweepRef.current, {
+          rotate: 360,
+          duration: 8,
+          repeat: -1,
+          ease: "none",
+          transformOrigin: "50% 50%",
+          onUpdate: function () {
+            const rotation = normalize(
+              Number(gsap.getProperty(sweepRef.current, "rotate")),
+            );
 
-          STACK_BLIPS.forEach((blip, i) => {
-            const blipAngle = normalize(blip.angle + ANGLE_OFFSET);
-            const diff = normalize(blipAngle - rotation);
-            const isInsideSweep = diff <= SWEEP_WIDTH;
+            STACK_BLIPS.forEach((blip, i) => {
+              const blipAngle = normalize(blip.angle + ANGLE_OFFSET);
+              const diff = normalize(blipAngle - rotation);
+              const isInsideSweep = diff <= SWEEP_WIDTH;
 
-            const el = blipRefs.current[i];
-            if (!el || !el.dot || !el.label) return;
+              const el = blipRefs.current[i];
+              if (!el || !el.dot || !el.label) return;
 
-            if (isInsideSweep && !activeState.current[i]) {
-              activeState.current[i] = true;
-              gsap.to(el.dot, {
-                backgroundColor: "#7CFFCE",
-                boxShadow: "0 0 16px 4px rgba(124,255,206,0.9)",
-                scale: 1.8,
-                duration: 0.12,
-                ease: "power1.out",
-                overwrite: true,
-              });
-              gsap.to(el.label, {
-                color: "#E8ECEA",
-                duration: 0.12,
-                overwrite: true,
-              });
-            } else if (!isInsideSweep && activeState.current[i]) {
-              activeState.current[i] = false;
-              gsap.to(el.dot, {
-                backgroundColor: "var(--color-green-main)",
-                boxShadow: "0 0 8px var(--color-green-main)",
-                scale: 1,
-                duration: 0.6,
-                ease: "power2.out",
-                overwrite: true,
-              });
-              gsap.to(el.label, {
-                color: "#7a8c8f",
-                duration: 0.6,
-                overwrite: true,
-              });
-            }
-          });
-        },
-      });
+              if (isInsideSweep && !activeState.current[i]) {
+                activeState.current[i] = true;
+                gsap.to(el.dot, {
+                  backgroundColor: "#7CFFCE",
+                  boxShadow: "0 0 16px 4px rgba(124,255,206,0.9)",
+                  scale: 1.8,
+                  duration: 0.12,
+                  ease: "power1.out",
+                  overwrite: true,
+                });
+                gsap.to(el.label, {
+                  color: "#E8ECEA",
+                  duration: 0.12,
+                  overwrite: true,
+                });
+              } else if (!isInsideSweep && activeState.current[i]) {
+                activeState.current[i] = false;
+                gsap.to(el.dot, {
+                  backgroundColor: "var(--color-green-main)",
+                  boxShadow: "0 0 8px var(--color-green-main)",
+                  scale: 1,
+                  duration: 0.6,
+                  ease: "power2.out",
+                  overwrite: true,
+                });
+                gsap.to(el.label, {
+                  color: "#7a8c8f",
+                  duration: 0.6,
+                  overwrite: true,
+                });
+              }
+            });
+          },
+        });
 
-      gsap.from(".radar-ring", {
-        opacity: 0,
-        scale: 0.85,
-        duration: 1,
-        stagger: 0.08,
-      });
+        gsap.from(".radar-ring", {
+          opacity: 0,
+          scale: 0.85,
+          duration: 1,
+          stagger: 0.08,
+        });
 
-      gsap.from(".radar-blip", {
-        opacity: 0,
-        scale: 0,
-        duration: 0.4,
-        stagger: { each: 0.06, from: "random" },
-        delay: 0.3,
-      });
+        gsap.from(".radar-blip", {
+          opacity: 0,
+          scale: 0,
+          duration: 0.4,
+          stagger: { each: 0.06, from: "random" },
+          delay: 0.3,
+        });
 
-      gsap.to(".radar-wrap", {
-        yPercent: 15,
-        opacity: 0.4,
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
+        gsap.to(".radar-wrap", {
+          yPercent: 15,
+          opacity: 0.4,
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
       });
     },
     { scope: rootRef },

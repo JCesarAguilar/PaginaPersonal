@@ -43,40 +43,43 @@ export default function ContactSection() {
 
   useGSAP(
     () => {
-      gsap.to(skyRef.current, {
-        scale: 1.08,
-        duration: 18,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      gsap.utils.toArray<HTMLElement>(".contact-star").forEach((star) => {
-        gsap.to(star, {
-          opacity: 0.15,
-          duration: 1.5 + Math.random() * 2,
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.to(skyRef.current, {
+          scale: 1.08,
+          duration: 18,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
-          delay: Number(star.dataset.delay),
         });
-      });
 
-      gsap.from(".contact-arch", {
-        scale: 0.94,
-        opacity: 0,
-        duration: 1.1,
-        ease: "power2.out",
-        scrollTrigger: { trigger: container.current, start: "top 75%" },
-      });
+        gsap.utils.toArray<HTMLElement>(".contact-star").forEach((star) => {
+          gsap.to(star, {
+            opacity: 0.15,
+            duration: 1.5 + Math.random() * 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: Number(star.dataset.delay),
+          });
+        });
 
-      gsap.from(".contact-fade-in", {
-        opacity: 0,
-        y: 30,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: { trigger: container.current, start: "top 60%" },
+        gsap.from(".contact-arch", {
+          scale: 0.94,
+          opacity: 0,
+          duration: 1.1,
+          ease: "power2.out",
+          scrollTrigger: { trigger: container.current, start: "top 75%" },
+        });
+
+        gsap.from(".contact-fade-in", {
+          opacity: 0,
+          y: 30,
+          duration: 0.9,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: { trigger: container.current, start: "top 60%" },
+        });
       });
     },
     { scope: container },

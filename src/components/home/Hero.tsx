@@ -10,15 +10,18 @@ export default function Hero() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(".hero-eyebrow", { opacity: 0, y: 12, duration: 0.6 })
-        .from(
-          ".hero-title-line",
-          { opacity: 0, y: 40, duration: 0.9, stagger: 0.12 },
-          "-=0.3",
-        )
-        .from(".hero-tagline", { opacity: 0, y: 20, duration: 0.7 }, "-=0.4");
+        tl.from(".hero-eyebrow", { opacity: 0, y: 12, duration: 0.6 })
+          .from(
+            ".hero-title-line",
+            { opacity: 0, y: 40, duration: 0.9, stagger: 0.12 },
+            "-=0.3",
+          )
+          .from(".hero-tagline", { opacity: 0, y: 20, duration: 0.7 }, "-=0.4");
+      });
     },
     { scope: container },
   );
