@@ -29,9 +29,9 @@ const STAGES: Stage[] = [
     headline: "Serví 16 años en la Marina de Guerra del Perú.",
     body: "Durante mi periodo de formación en la Escuela Naval, tuve la oportunidad de estudiar paralelamente la carrera de Ingeniería Industrial en la Universidad de Piura, luego escogí especializarme en submarinos, donde aprendí sobre el funcionamiento y empleo de todos los sistemas de abordo y a trabajar en equipo bajo presión.",
     images: [
-      "/images/IMG_9867.jpg",
-      "/images/648677725_10163091878982061_5983176655256556889_n.jpg",
-      "/images/48408155_10156153191107061_242690601689022464_n.jpg",
+      "/images/about/marina-1.webp",
+      "/images/about/marina-2.webp",
+      "/images/about/marina-3.webp",
     ],
     imageAlt: "Julio en la Marina de Guerra del Perú",
     tag: "Liderazgo operativo",
@@ -41,7 +41,7 @@ const STAGES: Stage[] = [
     eyebrow: "La transición",
     headline: "Mi pasión por la tecnología.",
     body: "Hace 16 meses empecé a estudiar y programar de manera intensiva, primero como desarrollador full-stack, construyendo proyectos personales de extremo a extremo hasta llevar uno de ellos, RedLegal.pe, a producción real. Hoy mi foco está en especializarme en inteligencia artificial desde sus fundamentos: entrenamiento de modelos, sistemas RAG, agentes LLM y aplicaciones que integran modelos de lenguaje en productos reales.",
-    images: ["/images/setup-desarrollador-web.jpg"],
+    images: ["/images/about/setup-desarrollador.webp"],
     imageAlt: "Julio aprendiendo desarrollo de software",
     tag: "Full-stack + IA Engineer",
     weight: 1,
@@ -217,6 +217,7 @@ export default function AboutSection() {
                           fill
                           src={src}
                           alt={`${stage.imageAlt} (${imgIndex + 1})`}
+                          sizes="(min-width: 768px) 45vw, 100vw"
                           className="object-cover"
                         />
                       </div>

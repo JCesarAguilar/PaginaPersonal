@@ -178,6 +178,7 @@ export default function ProjectsSection() {
                       fill
                       src={project.image}
                       alt={project.imageAlt}
+                      sizes="(min-width: 768px) 50vw, 100vw"
                       className="object-cover object-top"
                     />
                   ) : (
