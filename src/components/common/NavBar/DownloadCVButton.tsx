@@ -13,7 +13,7 @@ export default function DownloadCVButton({
     <a
       href={href}
       download
-      className="items-center gap-2 px-6 py-2.5 rounded-full border border-green-main text-green-main font-mono text-sm font-medium hover:bg-green-main hover:text-black-medium transition-colors duration-300 hidden md:inline-flex"
+      className="items-center gap-2 px-6 py-2.5 rounded-full border border-green-main text-green-main font-mono text-sm font-medium hover:bg-green-main hover:text-black-medium transition-colors duration-300 inline-flex"
     >
       <Download className="w-4 h-4" />
       {label}

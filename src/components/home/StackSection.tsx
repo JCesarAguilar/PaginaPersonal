@@ -11,6 +11,7 @@ import { useMediaQuery } from "@/src/hooks/useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
 function chunkPairs(items: StackCategory[]): StackCategory[][] {
   const groups: StackCategory[][] = [];
   for (let i = 0; i < items.length; i += 2) {
@@ -21,7 +22,7 @@ function chunkPairs(items: StackCategory[]): StackCategory[][] {
 
 export default function StackSection() {
   const container = useRef<HTMLElement>(null);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   // En desktop: pares de 2 categorías por pantalla. En mobile: 1 por pantalla.
   const groups: StackCategory[][] = isDesktop
@@ -116,6 +117,20 @@ export default function StackSection() {
         ref={container}
         className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center px-6 md:px-20"
       >
+        {/* Fondo: grilla de plano técnico (fina cada 24px, marcada cada 120px) */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
+          style={{
+            backgroundImage: [
+              "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
+              "linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
+              "linear-gradient(rgba(61,255,176,0.09) 1px, transparent 1px)",
+              "linear-gradient(90deg, rgba(61,255,176,0.09) 1px, transparent 1px)",
+            ].join(", "),
+            backgroundSize: "24px 24px, 24px 24px, 120px 120px, 120px 120px",
+          }}
+        />
         <div className="hidden md:flex flex-col items-center gap-4 absolute left-8 top-1/2 -translate-y-1/2">
           <span className="font-mono text-xs text-green-main">
             <span className="stack-counter-current">1</span>/{groups.length}
@@ -133,18 +148,18 @@ export default function StackSection() {
         </p> */}
 
         <div className="relative z-10 max-w-5xl mx-auto w-full">
-          <div className="relative h-125 md:h-95">
+          <div className="grid">
             {groups.map((group) => (
               <div
                 key={group.map((c) => c.label).join("-")}
-                className="stack-stage absolute inset-0 grid md:grid-cols-2 gap-10"
+                className="stack-stage col-start-1 row-start-1 grid lg:grid-cols-2 gap-6 lg:gap-10"
               >
                 {group.map((cat) => (
                   <div
                     key={cat.label}
-                    className="bg-white p-10 rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] h-full flex flex-col items-center gap-3"
+                    className="bg-white p-6 md:p-8 lg:p-10 rounded-2xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] h-full flex flex-col items-center gap-3"
                   >
-                    <h2 className="font-mono font-bold text-3xl md:text-5xl text-black-medium mb-8">
+                    <h2 className="text-center font-mono font-bold text-3xl lg:text-5xl text-black-medium mb-6 lg:mb-8">
                       {cat.label}
                     </h2>
                     <div className="flex flex-wrap gap-5 justify-center">

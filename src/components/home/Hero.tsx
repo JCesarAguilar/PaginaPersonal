@@ -40,7 +40,9 @@ export default function Hero() {
       ref={container}
       className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center justify-center md:justify-start px-6 md:px-20"
     >
-      <SonarRadar className="absolute right-1/2 translate-x-1/2 md:top-30 md:right-20 md:translate-x-0" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-50 md:opacity-100">
+        <SonarRadar className="absolute right-1/2 translate-x-1/2 md:top-30 md:right-20 md:translate-x-0" />
+      </div>
 
       {/* Contenido */}
       <div className="relative z-10 text-center md:text-left">

@@ -168,7 +168,7 @@ export default function AboutSection() {
     <div id={toSectionId(PATHROUTES.ABOUT)}>
       <section
         ref={container}
-        className="relative min-h-screen w-full overflow-hidden bg-white-smoke flex items-center px-6 md:px-20"
+        className="relative min-h-screen w-full overflow-hidden bg-white-smoke flex items-center px-6 md:px-20 pt-20 pb-8 md:py-0"
       >
         <div className="hidden md:block absolute left-8 top-1/2 -translate-y-1/2 w-px h-40 bg-[#1A2220]/20">
           <div
@@ -177,12 +177,12 @@ export default function AboutSection() {
           />
         </div>
 
-        <div className="relative z-10 w-full md:ml-16 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-          <div className="relative h-70 md:h-60">
+        <div className="relative z-10 w-full md:pl-16 grid md:grid-cols-2 gap-8 md:gap-20 items-center">
+          <div className="grid">
             {STAGES.map((stage, i) => (
               <div
                 key={i}
-                className="pin-stage absolute inset-0 flex flex-col justify-center"
+                className="pin-stage col-start-1 row-start-1 flex flex-col justify-center"
               >
                 <div className="bg-black-background  justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-4">
                   <p className="font-mono text-xs tracking-[0.3em] uppercase text-green-main ">
@@ -193,14 +193,14 @@ export default function AboutSection() {
                 <h2 className="font-sans font-bold text-[30px] md:text-5xl text-black-medium leading-[1.1] mb-4">
                   {stage.headline}
                 </h2>
-                <p className="max-w-xl text-gray-strong text-base md:text-lg leading-relaxed">
+                <p className="max-w-xl text-gray-strong text-[15px] md:text-lg leading-relaxed">
                   {stage.body}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="relative h-80 md:h-96">
+          <div className="relative h-52 md:h-96">
             {STAGES.map((stage, i) => (
               <div
                 key={i}

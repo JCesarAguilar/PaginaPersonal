@@ -102,7 +102,7 @@ export default function ProjectsSection() {
     <div id={toSectionId(PATHROUTES.PROJECTS)}>
       <section
         ref={container}
-        className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center px-6 md:px-20 py-24"
+        className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center px-6 md:px-20 pt-20 pb-8 md:py-24"
       >
         <div className="hidden md:flex flex-col items-center gap-4 absolute left-8 top-1/2 -translate-y-1/2">
           <span className="font-mono text-xs text-green-main">
@@ -120,12 +120,12 @@ export default function ProjectsSection() {
         Proyectos
       </p> */}
 
-        <div className="relative z-10 max-w-6xl mx-auto md:ml-20 w-full">
-          <div className="relative h-140 md:h-105">
+        <div className="relative z-10 max-w-6xl mx-auto w-full md:pl-12">
+          <div className="grid">
             {PROJECTS.map((project) => (
               <div
                 key={project.title}
-                className="proj-stage absolute inset-0 grid md:grid-cols-2 gap-10 items-center"
+                className="proj-stage col-start-1 row-start-1 grid md:grid-cols-2 gap-6 md:gap-10 items-center"
               >
                 <div>
                   <p className="font-mono text-xs tracking-[0.25em] uppercase text-green-main mb-4">
@@ -172,7 +172,7 @@ export default function ProjectsSection() {
                   )}
                 </div>
 
-                <div className="relative w-full aspect-video md:h-full rounded-2xl overflow-hidden border border-white/10 bg-white/2">
+                <div className="relative w-full aspect-video lg:aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/2">
                   {project.image ? (
                     <Image
                       fill

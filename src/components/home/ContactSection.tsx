@@ -81,7 +81,7 @@ export default function ContactSection() {
           </p>
         </header>
 
-        <div className="mt-12 grid gap-10 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-14">
+        <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
           {/* Canales directos */}
           <div className="contact-fade-in flex min-w-0 flex-col gap-3">
             <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.16em] text-fog-dim">

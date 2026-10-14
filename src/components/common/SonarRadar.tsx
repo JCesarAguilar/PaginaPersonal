@@ -211,7 +211,7 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
                     blipRefs.current[i] = { dot: null, label: null };
                   blipRefs.current[i].label = el;
                 }}
-                className="text-[11px] font-mono text-fog-dim whitespace-nowrap tracking-wide"
+                className="hidden md:inline text-[11px] font-mono text-fog-dim whitespace-nowrap tracking-wide"
               >
                 {blip.label}
               </span>

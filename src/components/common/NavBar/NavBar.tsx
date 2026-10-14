@@ -24,7 +24,7 @@ export default function NavBar() {
       </Link>
 
       {/* Escritorio: enlaces + CV a la derecha */}
-      <div className="hidden md:flex gap-7 items-center">
+      <div className="hidden lg:flex gap-7 items-center">
         <NavItems />
         <DownloadCVButton label="Descargar CV" href={SITE.cvUrl} />
       </div>
