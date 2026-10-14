@@ -41,21 +41,24 @@ export async function sendContact(
   }
 
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `https://formspree.io/f/${process.env.FORMSPREE_FORM_ID}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          nombre: values.name,
+          email: values.email, // Formspree lo usa como "Responder a"
+          motivo: values.reason,
+          mensaje: values.message,
+          _subject: `[${values.reason}] ${values.name}`,
+        }),
       },
-      body: JSON.stringify({
-        from: "Portafolio <onboarding@resend.dev>",
-        to: process.env.CONTACT_TO_EMAIL,
-        reply_to: values.email,
-        subject: `[${values.reason}] ${values.name}`,
-        text: `${values.message}\n\n— ${values.name} <${values.email}>`,
-      }),
-    });
-    if (!res.ok) throw new Error(`Resend respondió ${res.status}`);
+    );
+    if (!res.ok) throw new Error(`Formspree respondió ${res.status}`);
     return { status: "success", values };
   } catch (err) {
     console.error("sendContact:", err);
