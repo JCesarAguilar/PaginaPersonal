@@ -2,201 +2,177 @@
 
 import gsap from "gsap";
 import { useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { PROJECTS } from "@/src/data/projects";
+import { PROJECTS, type Project } from "@/src/data/projects";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
+import { buttonStyles } from "@/src/components/ui/button-styles";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Portada: la captura si existe; si no, la métrica principal sobre el motivo del sonar.
+function ProjectCover({ project }: { project: Project }) {
+  if (project.image) {
+    return (
+      <Image
+        fill
+        src={project.image}
+        alt={project.imageAlt ?? project.title}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        className="object-cover object-top"
+      />
+    );
+  }
+
+  const [main] = project.metrics;
+  return (
+    <div className="absolute inset-0 flex flex-col items-start justify-end gap-2 p-6 md:p-10 bg-[radial-gradient(circle_at_85%_15%,rgba(61,255,176,0.16),transparent_55%)]">
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 400 400"
+        fill="none"
+        stroke="currentColor"
+        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 text-green-main/15"
+      >
+        <circle cx="200" cy="200" r="60" />
+        <circle cx="200" cy="200" r="120" />
+        <circle cx="200" cy="200" r="180" />
+      </svg>
+      <p className="relative font-mono text-xs uppercase tracking-[0.25em] text-green-main">
+        {project.tag}
+      </p>
+      {main && (
+        <>
+          <p className="relative font-display text-5xl md:text-7xl font-bold leading-none text-white-smoke">
+            {main.value}
+          </p>
+          <p className="relative text-sm text-fog">{main.label}</p>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default function ProjectsSection() {
   const container = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      const stageEls = gsap.utils.toArray<HTMLElement>(".proj-stage");
-
-      const boundaries = [0];
-      PROJECTS.forEach((p) => {
-        boundaries.push(boundaries[boundaries.length - 1] + (p.weight ?? 1));
-      });
-      const totalDuration = boundaries[boundaries.length - 1];
-      const last = PROJECTS.length - 1;
-
-      // Puntos donde la página "se acomoda" (0 = inicio, 1 = final del pin).
-      // Primero y último en los extremos; los del medio, en el centro de su tramo.
-      const restPoints = PROJECTS.map((_, i) => {
-        if (i === 0) return 0;
-        if (i === last) return 1;
-        return (boundaries[i] + boundaries[i + 1]) / 2 / totalDuration;
-      });
-
       const mm = gsap.matchMedia();
-
-      mm.add(
-        {
-          motion: "(prefers-reduced-motion: no-preference)",
-          reduce: "(prefers-reduced-motion: reduce)",
-        },
-        (context) => {
-          const reduce = Boolean(context.conditions?.reduce);
-          const shift = reduce ? 0 : 12; // desplazamiento sutil en px
-          const fade = reduce ? 0.01 : 0.5; // duración del cruce
-
-          gsap.set(stageEls, { autoAlpha: 0, y: shift });
-          gsap.set(stageEls[0], { autoAlpha: 1, y: 0 });
-
-          const tl = gsap.timeline({
-            defaults: { ease: "power1.inOut" },
-            scrollTrigger: {
-              trigger: container.current,
-              start: "top top",
-              end: `+=${totalDuration * 100}%`,
-              scrub: 0.6,
-              pin: true,
-              anticipatePin: 1,
-              snap: {
-                snapTo: restPoints,
-                duration: { min: 0.3, max: 0.7 },
-                delay: 0.1,
-                ease: "power2.inOut",
-              },
-            },
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.utils.toArray<HTMLElement>(".proj-item").forEach((el) => {
+          gsap.from(el, {
+            opacity: 0,
+            y: 32,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 80%", once: true },
           });
-
-          stageEls.forEach((el, i) => {
-            if (i === 0) return;
-            // El cruce queda centrado justo en el límite entre proyectos.
-            const at = boundaries[i] - fade / 2;
-
-            tl.to(
-              stageEls[i - 1],
-              { autoAlpha: 0, y: -shift, duration: fade },
-              at,
-            )
-              .to(el, { autoAlpha: 1, y: 0, duration: fade }, at)
-              .set(
-                ".proj-counter-current",
-                { innerText: i + 1 },
-                boundaries[i],
-              );
-          });
-
-          // La barra dura TODO el timeline: así el timeline mide lo mismo
-          // que el scroll y el último proyecto recibe su "weight" completo.
-          tl.to(
-            ".proj-progress-bar",
-            { scaleY: 1, ease: "none", duration: totalDuration },
-            0,
-          );
-        },
-      );
+        });
+      });
     },
     { scope: container },
   );
 
   return (
-    <div id={toSectionId(PATHROUTES.PROJECTS)}>
-      <section
-        ref={container}
-        className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center px-6 md:px-20 pt-20 pb-8 md:py-24"
-      >
-        <div className="hidden md:flex flex-col items-center gap-4 absolute left-8 top-1/2 -translate-y-1/2">
-          <span className="font-mono text-xs text-green-main">
-            <span className="proj-counter-current">1</span>/{PROJECTS.length}
-          </span>
-          <div className="relative w-px h-32 bg-white/10">
-            <div
-              className="proj-progress-bar absolute top-0 left-0 w-full h-full bg-green-main origin-top"
-              style={{ transform: "scaleY(0)" }}
-            />
-          </div>
-        </div>
+    <section
+      id={toSectionId(PATHROUTES.PROJECTS)}
+      ref={container}
+      className="relative w-full bg-black-background px-6 py-24 md:px-20 md:py-32"
+    >
+      <div className="mx-auto max-w-6xl">
+        <header className="proj-item flex flex-col gap-4 border-b border-white/10 pb-12">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-green-main">
+            Proyectos
+          </p>
+          <h2 className="font-display text-4xl font-bold leading-tight text-white-smoke md:text-6xl">
+            IA y producto, medidos con datos.
+          </h2>
+        </header>
 
-        {/* <p className="absolute top-16 left-6 md:left-20 font-mono text-xs tracking-[0.3em] uppercase text-green-main">
-        Proyectos
-      </p> */}
+        <ul className="flex flex-col">
+          {PROJECTS.map((project, i) => (
+            <li
+              key={project.slug}
+              className="proj-item grid items-center gap-8 border-b border-white/10 py-16 md:grid-cols-2 md:gap-14"
+            >
+              <div className={i % 2 === 1 ? "md:order-2" : undefined}>
+                <p className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-green-main">
+                  {project.tag}
+                </p>
+                <h3 className="mb-4 font-sans text-3xl font-bold text-white md:text-4xl">
+                  {project.title}
+                </h3>
+                <p className="mb-6 max-w-md text-base leading-relaxed text-fog">
+                  {project.description}
+                </p>
 
-        <div className="relative z-10 max-w-6xl mx-auto w-full md:pl-12">
-          <div className="grid">
-            {PROJECTS.map((project) => (
-              <div
-                key={project.title}
-                className="proj-stage col-start-1 row-start-1 grid md:grid-cols-2 gap-6 md:gap-10 items-center"
-              >
-                <div>
-                  <p className="font-mono text-xs tracking-[0.25em] uppercase text-green-main mb-4">
-                    {project.tag}
-                  </p>
-                  <h3 className="font-sans font-bold text-3xl md:text-4xl text-white mb-4">
-                    {project.title}
-                  </h3>
-                  <p className="text-fog text-base leading-relaxed mb-6 max-w-md">
-                    {project.description}
-                  </p>
+                <dl className="mb-6 flex flex-wrap gap-6">
+                  {project.metrics.map((m) => (
+                    <div key={m.label} className="flex flex-col">
+                      <dt className="order-2 text-xs text-fog">{m.label}</dt>
+                      <dd className="order-1 font-sans text-2xl font-bold text-green-main">
+                        {m.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
 
-                  <div className="flex flex-wrap gap-6 mb-6">
-                    {project.metrics.map((m) => (
-                      <div key={m.label}>
-                        <div className="font-sans font-bold text-2xl text-green-main">
-                          {m.value}
-                        </div>
-                        <div className="text-xs text-fog">{m.label}</div>
-                      </div>
-                    ))}
-                  </div>
+                <ul className="mb-8 flex flex-wrap gap-2" aria-label="Tecnologías">
+                  {project.stack.map((tech) => (
+                    <li
+                      key={tech}
+                      className="rounded-full border border-white/15 px-3 py-1 font-mono text-[11px] text-fog"
+                    >
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 rounded-full border border-white/15 text-[11px] font-mono text-fog"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
+                <div className="flex flex-wrap gap-3">
                   {project.liveUrl && (
-                    <Link
+                    <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-green-main text-black-medium font-mono text-sm font-bold hover:opacity-90 transition-opacity"
+                      className={`${buttonStyles.primary} inline-flex items-center gap-2 px-5 py-2.5`}
                     >
                       Ver proyecto →
-                    </Link>
+                      <span className="sr-only">
+                        {project.title} (se abre en una pestaña nueva)
+                      </span>
+                    </a>
                   )}
-                </div>
-
-                <div className="relative w-full aspect-video lg:aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/2">
-                  {project.image ? (
-                    <Image
-                      fill
-                      src={project.image}
-                      alt={project.imageAlt}
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      className="object-cover object-top"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-3 border-2 border-dashed border-white/10 m-3 rounded-xl">
-                      <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-gray-strong/60">
-                        Reemplaza con tu captura
+                  {project.codeUrl && (
+                    <a
+                      href={project.codeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${
+                        project.liveUrl
+                          ? buttonStyles.secondary
+                          : buttonStyles.primary
+                      } inline-flex items-center gap-2 px-5 py-2.5`}
+                    >
+                      Ver código ↗
+                      <span className="sr-only">
+                        de {project.title} en GitHub (se abre en una pestaña
+                        nueva)
                       </span>
-                      <span className="font-mono text-[10px] text-gray-strong/40">
-                        {`project.image = "${project.imageAlt}"`}
-                      </span>
-                    </div>
+                    </a>
                   )}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
+
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-white/2 lg:aspect-4/3">
+                <ProjectCover project={project} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
