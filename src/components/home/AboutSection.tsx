@@ -7,46 +7,9 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
+import { STAGES } from "@/src/data/about";
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface Stage {
-  eyebrow: string;
-  headline: string;
-  body: string;
-  images: string[];
-  imageAlt: string;
-  tag: string;
-  // Cuánto "espacio" de scroll ocupa esta etapa comparado con las demás.
-  // 1 = normal. 1.8 = casi el doble de scroll para verla completa.
-  // Súbelo si tiene varias fotos o mucho texto; bájalo si es simple.
-  weight?: number;
-}
-
-const STAGES: Stage[] = [
-  {
-    eyebrow: "2005 — 2024",
-    headline: "Serví 16 años en la Marina de Guerra del Perú.",
-    body: "Durante mi periodo de formación en la Escuela Naval, tuve la oportunidad de estudiar paralelamente la carrera de Ingeniería Industrial en la Universidad de Piura, luego escogí especializarme en submarinos, donde aprendí sobre el funcionamiento y empleo de todos los sistemas de abordo y a trabajar en equipo bajo presión.",
-    images: [
-      "/images/about/marina-1.webp",
-      "/images/about/marina-2.webp",
-      "/images/about/marina-3.webp",
-    ],
-    imageAlt: "Julio en la Marina de Guerra del Perú",
-    tag: "Liderazgo operativo",
-    weight: 1.8, // 3 fotos + párrafo largo → necesita más scroll
-  },
-  {
-    eyebrow: "La transición",
-    headline: "Mi pasión por la tecnología.",
-    body: "Hace 16 meses empecé a estudiar y programar de manera intensiva, primero como desarrollador full-stack, construyendo proyectos personales de extremo a extremo hasta llevar uno de ellos, RedLegal.pe, a producción real. Hoy mi foco está en especializarme en inteligencia artificial desde sus fundamentos: entrenamiento de modelos, sistemas RAG, agentes LLM y aplicaciones que integran modelos de lenguaje en productos reales.",
-    images: ["/images/about/setup-desarrollador.webp"],
-    imageAlt: "Julio aprendiendo desarrollo de software",
-    tag: "Full-stack + IA Engineer",
-    weight: 1,
-  },
-];
 
 export default function AboutSection() {
   const container = useRef<HTMLElement>(null);
@@ -179,12 +142,12 @@ export default function AboutSection() {
 
         <div className="relative z-10 w-full md:pl-16 grid md:grid-cols-2 gap-8 md:gap-20 items-center">
           <div className="grid">
-            {STAGES.map((stage, i) => (
+            {STAGES.map((stage) => (
               <div
-                key={i}
+                key={stage.eyebrow}
                 className="pin-stage col-start-1 row-start-1 flex flex-col justify-center"
               >
-                <div className="bg-black-background  justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-4">
+                <div className="bg-black-background justify-center items-center flex w-fit px-4 py-1.5 rounded-full mb-4">
                   <p className="font-mono text-xs tracking-[0.3em] uppercase text-green-main ">
                     {stage.eyebrow}
                   </p>
@@ -203,45 +166,32 @@ export default function AboutSection() {
           <div className="relative h-52 md:h-96">
             {STAGES.map((stage, i) => (
               <div
-                key={i}
+                key={stage.eyebrow}
                 className="pin-card absolute inset-0 rounded-2xl overflow-hidden border border-black-medium/10 bg-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]"
               >
-                {stage.images.length > 0 ? (
-                  <>
-                    {stage.images.map((src, imgIndex) => (
-                      <div
-                        key={src}
-                        className={`pin-card-img-${i} absolute inset-0`}
-                      >
-                        <Image
-                          fill
-                          src={src}
-                          alt={`${stage.imageAlt} (${imgIndex + 1})`}
-                          sizes="(min-width: 768px) 45vw, 100vw"
-                          className="object-cover"
-                        />
-                      </div>
-                    ))}
+                {stage.images.map((src, imgIndex) => (
+                  <div
+                    key={src}
+                    className={`pin-card-img-${i} absolute inset-0`}
+                  >
+                    <Image
+                      fill
+                      src={src}
+                      alt={`${stage.imageAlt} (${imgIndex + 1})`}
+                      sizes="(min-width: 768px) 45vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
 
-                    {stage.images.length > 1 && (
-                      <div className="absolute bottom-4 right-4 z-10 flex gap-1.5">
-                        {stage.images.map((_, dotIndex) => (
-                          <span
-                            key={dotIndex}
-                            className={`pin-card-dot-${i} w-1.5 h-1.5 rounded-full bg-white opacity-40`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center gap-3 border-2 border-dashed border-black-medium/15 m-3 rounded-xl">
-                    <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-gray-strong/60">
-                      Reemplaza con tu imagen
-                    </span>
-                    <span className="font-mono text-[10px] text-gray-strong/40">
-                      {`stage.images = ["${stage.imageAlt}"]`}
-                    </span>
+                {stage.images.length > 1 && (
+                  <div className="absolute bottom-4 right-4 z-10 flex gap-1.5">
+                    {stage.images.map((_, dotIndex) => (
+                      <span
+                        key={dotIndex}
+                        className={`pin-card-dot-${i} w-1.5 h-1.5 rounded-full bg-white opacity-40`}
+                      />
+                    ))}
                   </div>
                 )}
 
