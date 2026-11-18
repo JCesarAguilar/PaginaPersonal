@@ -16,14 +16,18 @@ interface BlipElements {
 }
 
 const STACK_BLIPS: StackBlip[] = [
-  { label: "Pinecone", angle: 20, radius: 100 },
-  { label: "Next.js", angle: 65, radius: 260 },
+  { label: "TypeScript", angle: 250, radius: 260 },
+  { label: "Python", angle: 215, radius: 230 },
+  { label: "JavaScript", angle: 245, radius: 130 },
+  { label: "Pinecone", angle: 10, radius: 100 },
+  { label: "Next.js", angle: 65, radius: 120 },
   { label: "NestJS", angle: 110, radius: 200 },
   { label: "PostgreSQL", angle: 155, radius: 250 },
-  { label: "Python", angle: 205, radius: 230 },
-  { label: "TypeScript", angle: 250, radius: 260 },
   { label: "LangChain", angle: 295, radius: 210 },
   { label: "RAG", angle: 340, radius: 245 },
+  { label: "Langfuse", angle: 180, radius: 245 },
+  { label: "ChromaDb", angle: 30, radius: 220 },
+  { label: "React", angle: 70, radius: 220 },
 ];
 
 const SWEEP_WIDTH = 60;
@@ -59,11 +63,7 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
   // Factor de escala: 1 en desktop (círculo a tamaño completo),
   // menor a 1 cuando el círculo se achica por max-w-[120vw] en mobile.
   // En el servidor vale 1; React lo corrige al hidratar sin error.
-  const scale = useSyncExternalStore(
-    subscribeResize,
-    getScale,
-    () => 1,
-  );
+  const scale = useSyncExternalStore(subscribeResize, getScale, () => 1);
 
   useGSAP(
     () => {

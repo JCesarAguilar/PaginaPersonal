@@ -10,7 +10,7 @@ import { PATHROUTES } from "@/src/helpers/publicNavItems";
 const PROOF = [
   { value: "+120", label: "usuarios en 48 h en RedLegal.pe" },
   { value: "100%", label: "respuestas con fuente citada en el RAG legal" },
-  { value: "+5", label: "aplicaciones de IA y web desplegadas" },
+  { value: "+20", label: "aplicaciones de IA y web desplegadas" },
 ];
 
 export default function Hero() {
@@ -40,7 +40,10 @@ export default function Hero() {
       ref={container}
       className="relative min-h-screen w-full overflow-hidden bg-black-background flex items-center justify-center md:justify-start px-6 md:px-20"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-50 md:opacity-100">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-50 md:opacity-100"
+      >
         <SonarRadar className="absolute right-1/2 translate-x-1/2 md:top-30 md:right-20 md:translate-x-0" />
       </div>
 

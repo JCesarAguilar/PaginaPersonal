@@ -11,7 +11,6 @@ import { useMediaQuery } from "@/src/hooks/useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 function chunkPairs(items: StackCategory[]): StackCategory[][] {
   const groups: StackCategory[][] = [];
   for (let i = 0; i < items.length; i += 2) {
@@ -120,7 +119,7 @@ export default function StackSection() {
         {/* Fondo: grilla de plano técnico (fina cada 24px, marcada cada 120px) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
+          className="pointer-events-none absolute inset-0 mask-[radial-gradient(ellipse_at_center,black_40%,transparent_85%)]"
           style={{
             backgroundImage: [
               "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
