@@ -5,7 +5,7 @@ import Image from "next/image";
 
 interface TechBadgeProps {
   name: string;
-  iconSrc: string; // ruta local en /public
+  iconSrc?: string; // ruta local en /public; sin ícono se muestran las iniciales
   size?: "sm" | "lg";
 }
 
@@ -21,19 +21,14 @@ export default function TechBadge({
 }: TechBadgeProps) {
   const [broken, setBroken] = useState(false);
   const s = SIZES[size];
+  const showIcon = iconSrc && !broken;
 
   return (
     <div className={`flex flex-col items-center gap-2 ${s.wrap}`}>
-      {broken ? (
-        <div
-          className={`${s.box} rounded-xl bg-white-smoke border border-black-medium/10 flex items-center justify-center font-mono font-bold text-green-main`}
-        >
-          {name.slice(0, 2).toUpperCase()}
-        </div>
-      ) : (
-        <div
-          className={`${s.box} rounded-xl bg-white-smoke border border-black-medium/10 flex items-center justify-center`}
-        >
+      <div
+        className={`${s.box} rounded-xl bg-white-smoke border border-black-medium/10 flex items-center justify-center`}
+      >
+        {showIcon ? (
           <Image
             src={iconSrc}
             alt=""
@@ -42,8 +37,15 @@ export default function TechBadge({
             unoptimized
             onError={() => setBroken(true)}
           />
-        </div>
-      )}
+        ) : (
+          <span
+            aria-hidden="true"
+            className="font-mono font-bold text-black-medium"
+          >
+            {name.slice(0, 2).toUpperCase()}
+          </span>
+        )}
+      </div>
       <span
         className={`${s.text} font-mono text-gray-strong text-center leading-tight`}
       >

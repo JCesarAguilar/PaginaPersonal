@@ -1,51 +1,68 @@
 export interface StackItem {
   name: string;
-  iconSrc: string; // ruta local en /public, ej: "/images/logos/stack/react.svg"
+  // Ruta local en /public. Sin ícono, se muestran las iniciales.
+  iconSrc?: string;
 }
 
 export interface StackCategory {
   label: string;
   items: StackItem[];
+  featured?: boolean; // ocupa todo el ancho de la grilla
 }
+
+const STACK_ICONS = "/images/logos/stack";
 
 export const STACK_CATEGORIES: StackCategory[] = [
   {
-    label: "Lenguajes",
-    items: [
-      { name: "Python", iconSrc: "/images/logos/stack/python.svg" },
-      { name: "TypeScript", iconSrc: "/images/logos/stack/typescript.svg" },
-      { name: "JavaScript", iconSrc: "/images/logos/stack/javascript.svg" },
-    ],
-  },
-  {
-    label: "AI Engineer",
+    label: "Inteligencia artificial",
+    featured: true,
     items: [
       { name: "LLMs", iconSrc: "/images/logos/openai-icon.webp" },
       { name: "LangChain", iconSrc: "/images/logos/langchain-icon.webp" },
       { name: "RAG", iconSrc: "/images/logos/rag-i.jpg" },
       { name: "Pinecone", iconSrc: "/images/logos/pinecone-icon.png" },
       { name: "ChromaDB", iconSrc: "/images/logos/chromadb-icon.png" },
+      { name: "Langfuse" },
+      { name: "Pydantic", iconSrc: `${STACK_ICONS}/pydantic.svg` },
+      { name: "Vapi" },
     ],
   },
   {
-    label: "Full Stack",
+    label: "Lenguajes",
     items: [
-      { name: "Next.js", iconSrc: "/images/logos/stack/nextdotjs.svg" },
-      { name: "React", iconSrc: "/images/logos/stack/react.svg" },
-      { name: "NestJS", iconSrc: "/images/logos/stack/nestjs.svg" },
-      { name: "PostgreSQL", iconSrc: "/images/logos/stack/postgresql.svg" },
-      { name: "MongoDB", iconSrc: "/images/logos/stack/mongodb.svg" },
-      { name: "Tailwind CSS", iconSrc: "/images/logos/stack/tailwindcss.svg" },
+      { name: "Python", iconSrc: `${STACK_ICONS}/python.svg` },
+      { name: "TypeScript", iconSrc: `${STACK_ICONS}/typescript.svg` },
+      { name: "JavaScript", iconSrc: `${STACK_ICONS}/javascript.svg` },
     ],
   },
   {
-    label: "Herramientas",
+    label: "Backend",
     items: [
-      //   { name: "Docker", iconSrc: "/images/logos/stack/docker.svg" },
-      { name: "Git", iconSrc: "/images/logos/stack/git.svg" },
-      { name: "GitHub", iconSrc: "/images/logos/stack/github.svg" },
-      { name: "Vercel", iconSrc: "/images/logos/stack/vercel.svg" },
-      { name: "Postman", iconSrc: "/images/logos/stack/postman.svg" },
+      { name: "FastAPI", iconSrc: `${STACK_ICONS}/fastapi.svg` },
+      { name: "Node.js", iconSrc: `${STACK_ICONS}/nodedotjs.svg` },
+      { name: "NestJS", iconSrc: `${STACK_ICONS}/nestjs.svg` },
+      { name: "PostgreSQL", iconSrc: `${STACK_ICONS}/postgresql.svg` },
+      { name: "MongoDB", iconSrc: `${STACK_ICONS}/mongodb.svg` },
+      { name: "Docker", iconSrc: `${STACK_ICONS}/docker.svg` },
+    ],
+  },
+  {
+    label: "Frontend",
+    items: [
+      { name: "Next.js", iconSrc: `${STACK_ICONS}/nextdotjs.svg` },
+      { name: "React", iconSrc: `${STACK_ICONS}/react.svg` },
+      { name: "Tailwind CSS", iconSrc: `${STACK_ICONS}/tailwindcss.svg` },
+    ],
+  },
+  {
+    label: "Herramientas y calidad",
+    items: [
+      { name: "Git", iconSrc: `${STACK_ICONS}/git.svg` },
+      { name: "GitHub", iconSrc: `${STACK_ICONS}/github.svg` },
+      { name: "Vercel", iconSrc: `${STACK_ICONS}/vercel.svg` },
+      { name: "pytest", iconSrc: `${STACK_ICONS}/pytest.svg` },
+      { name: "Jest", iconSrc: `${STACK_ICONS}/jest.svg` },
+      { name: "Postman", iconSrc: `${STACK_ICONS}/postman.svg` },
     ],
   },
 ];

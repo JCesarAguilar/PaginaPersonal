@@ -26,7 +26,7 @@ const STACK_BLIPS: StackBlip[] = [
   { label: "LangChain", angle: 295, radius: 210 },
   { label: "RAG", angle: 340, radius: 245 },
   { label: "Langfuse", angle: 180, radius: 245 },
-  { label: "ChromaDb", angle: 30, radius: 220 },
+  { label: "ChromaDB", angle: 30, radius: 220 },
   { label: "React", angle: 70, radius: 220 },
 ];
 
