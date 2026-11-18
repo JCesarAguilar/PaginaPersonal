@@ -3,7 +3,7 @@
 export const SITE = {
   name: "Julio César Aguilar",
   url: "https://julio-aguilar.vercel.app",
-  role: "AI Engineer · Full Stack Developer",
+  role: "AI Engineer · Full Stack Product Engineer",
   email: "jcesar.a.15@gmail.com",
   cvUrl: "/CV_Julio_Aguilar.pdf",
   social: [

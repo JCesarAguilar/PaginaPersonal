@@ -8,11 +8,9 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="text-center md:text-left">
           <p className="font-sans font-bold text-lg text-white-smoke">
-            Julio César Aguilar
+            {SITE.name}
           </p>
-          <p className="font-mono text-xs text-fog mt-1">
-            AI Engineer · Full Stack Developer
-          </p>
+          <p className="font-mono text-xs text-fog mt-1">{SITE.role}</p>
         </div>
 
         <nav className="flex flex-wrap gap-6 justify-center">
