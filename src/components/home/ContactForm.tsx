@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { sendContact, type ContactState } from "@/src/app/actions/contact";
 import { SITE } from "@/src/data/site";
+import { buttonStyles } from "@/src/components/ui/button-styles";
 
 const initialState: ContactState = { status: "idle" };
 
@@ -141,7 +142,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="flex h-13 items-center justify-center gap-2 rounded-full bg-green-main font-mono text-sm font-bold text-black-background transition-opacity hover:opacity-90 disabled:opacity-55"
+        className={`${buttonStyles.primary} flex h-13 items-center justify-center gap-2`}
       >
         {pending ? "Enviando…" : "Enviar mensaje →"}
       </button>
