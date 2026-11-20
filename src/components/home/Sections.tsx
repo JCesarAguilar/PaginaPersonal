@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, AudioLines, GitCompare, Network } from "lucide-react";
 
 import { ABOUT_PARAGRAPHS } from "@/src/data/about";
 import { EXPERIENCE } from "@/src/data/experience";
@@ -89,6 +89,12 @@ export function ExperienceBlock() {
   );
 }
 
+const COVER_ICONS = {
+  voice: AudioLines,
+  compare: GitCompare,
+  agents: Network,
+};
+
 function ProjectThumb({ project }: { project: Project }) {
   if (project.image) {
     return (
@@ -101,13 +107,24 @@ function ProjectThumb({ project }: { project: Project }) {
       />
     );
   }
-  const [main] = project.metrics;
+  const Icon = COVER_ICONS[project.cover ?? "agents"];
   return (
-    <div className="absolute inset-0 flex flex-col justify-end bg-[radial-gradient(circle_at_80%_10%,color-mix(in_srgb,var(--color-green-main)_18%,transparent),transparent_60%)] p-4">
-      <p className="font-display text-3xl font-bold leading-none text-white-smoke">
-        {main?.value}
-      </p>
-      <p className="mt-1 text-[11px] leading-tight text-fog">{main?.label}</p>
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 flex items-center justify-center"
+      style={{
+        // Brillo verde al centro sobre una grilla fina.
+        backgroundImage:
+          "radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--color-green-main) 14%, transparent), transparent 70%), linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+        backgroundSize: "100% 100%, 16px 16px, 16px 16px",
+      }}
+    >
+      <span className="flex h-12 w-12 items-center justify-center rounded-md border border-green-main/30 bg-black-background/80 text-green-main">
+        <Icon className="h-6 w-6" strokeWidth={1.5} />
+      </span>
+      <span className="absolute bottom-2 left-3 font-mono text-[10px] uppercase tracking-[0.2em] text-fog-dim">
+        {project.tag}
+      </span>
     </div>
   );
 }

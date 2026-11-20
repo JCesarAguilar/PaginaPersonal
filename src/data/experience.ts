@@ -22,7 +22,7 @@ export const EXPERIENCE: Experience[] = [
     company: "RedLegal.pe",
     url: "https://redlegal.pe",
     description:
-      "Llevé la plataforma de la idea a producción: pagos recurrentes con Culqi, +110 páginas migradas a SSG/ISR, SEO técnico que triplicó las impresiones en Google, CI con GitHub Actions y tests con Jest.",
+      "Marketplace legal en producción que conecta a personas con abogados verificados en Perú por especialidad y ciudad, con contacto directo por WhatsApp y suscripciones de pago para abogados. Lo fundé y lo construyo de punta a punta: producto, arquitectura, backend, frontend, despliegue y crecimiento. Con Next.js genero más de 150 landing pages por especialidad y ciudad indexadas en Google; una API modular en NestJS sobre PostgreSQL resuelve las búsquedas con filtros múltiples, y mido el embudo con eventos en PostHog para decidir con datos.",
     stack: ["Next.js", "NestJS", "PostgreSQL", "Culqi", "PostHog"],
   },
   {

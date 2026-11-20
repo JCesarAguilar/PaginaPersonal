@@ -10,8 +10,9 @@ export interface Project {
   description: string;
   stack: string[];
   metrics: Metric[];
-  // Sin imagen, la tarjeta muestra la métrica principal como portada.
+  // Sin imagen, la tarjeta muestra una portada con el ícono de "cover".
   image?: string;
+  cover?: "voice" | "compare" | "agents";
   imageAlt?: string;
   liveUrl?: string;
   codeUrl?: string;
@@ -57,6 +58,7 @@ export const PROJECTS: Project[] = [
       { value: "US$ 0,065", label: "costo promedio por llamada" },
       { value: "136", label: "tests automatizados" },
     ],
+    cover: "voice",
     codeUrl: `${GITHUB}/voice-receptionist`,
   },
   {
@@ -71,6 +73,7 @@ export const PROJECTS: Project[] = [
       { value: "~9 s", label: "por comparación" },
       { value: "−40%", label: "de latencia tras optimizar con datos" },
     ],
+    cover: "compare",
     codeUrl: `${GITHUB}/contract-comparison-agent`,
   },
   {
@@ -84,6 +87,7 @@ export const PROJECTS: Project[] = [
       { value: "17/17", label: "consultas derivadas al área correcta" },
       { value: "8,7/10", label: "calidad promedio según el evaluador" },
     ],
+    cover: "agents",
     codeUrl: `${GITHUB}/multi-agent-support`,
   },
   {
