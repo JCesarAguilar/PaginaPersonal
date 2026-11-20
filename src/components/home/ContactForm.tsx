@@ -44,7 +44,7 @@ export default function ContactForm() {
     <form
       action={formAction}
       noValidate
-      className="flex flex-col gap-5 rounded-2xl border border-white/10 bg-[#0e1416] p-6 md:p-9 text-left"
+      className="flex flex-col gap-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-9 text-left"
     >
       <div>
         <h3 className="text-xl font-bold text-white-smoke">

@@ -114,7 +114,7 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
                   overwrite: true,
                 });
                 gsap.to(el.label, {
-                  color: "#7a8c8f",
+                  color: "var(--color-fog-dim)",
                   duration: 0.6,
                   overwrite: true,
                 });

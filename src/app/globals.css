@@ -8,15 +8,15 @@
   --color-black-strong: #000000;
   --color-black-medium: #101010;
   --color-black-soft: #191919;
-  --color-black-background: #0a0e0f;
+  --color-black-background: #0a0a0a;
 
   --color-gray-strong: #4f4f4f;
   --color-gray-medium: #9f9f9f;
   --color-gray-soft: #f1f1f1;
 
   /* Texto sobre fondos oscuros */
-  --color-fog: #93a7aa; /* secundario: 7,7:1 */
-  --color-fog-dim: #7a8c8f; /* pequeño o terciario: 5,5:1 */
+  --color-fog: #a3a3a3; /* secundario */
+  --color-fog-dim: #8a8a8a; /* pequeño o terciario */
 
   --color-white-strong: #ffffff;
   --color-white-smoke: #fafafa;
