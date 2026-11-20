@@ -3,7 +3,6 @@ import {
   ArrowUpRight,
   AudioLines,
   GitCompare,
-  LayoutTemplate,
   Network,
 } from "lucide-react";
 
@@ -99,7 +98,6 @@ const COVER_ICONS = {
   voice: AudioLines,
   compare: GitCompare,
   agents: Network,
-  web: LayoutTemplate,
 };
 
 function ProjectThumb({ project }: { project: Project }) {

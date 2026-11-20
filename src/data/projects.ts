@@ -12,7 +12,7 @@ export interface Project {
   metrics: Metric[];
   // Sin imagen, la tarjeta muestra una portada con el ícono de "cover".
   image?: string;
-  cover?: "voice" | "compare" | "agents" | "web";
+  cover?: "voice" | "compare" | "agents";
   imageAlt?: string;
   liveUrl?: string;
   codeUrl?: string;
@@ -112,7 +112,8 @@ export const PROJECTS: Project[] = [
       "Sitio corporativo de una constructora peruana de edificaciones, viviendas y obras civiles. Me encargué del diseño, el frontend y el despliegue: servicios, portafolio de obras y contacto, con imágenes optimizadas y SEO para Google.",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     metrics: [],
-    cover: "web",
+    image: "/images/projects/marchand-ramos.webp",
+    imageAlt: "Inicio del sitio web de Marchand Ramos Contratistas Generales",
     liveUrl: "https://marchand-ramos-web.vercel.app/",
   },
   {
@@ -126,7 +127,8 @@ export const PROJECTS: Project[] = [
       { value: "99/100", label: "rendimiento en Lighthouse" },
       { value: "100/100", label: "accesibilidad en Lighthouse" },
     ],
-    cover: "web",
+    image: "/images/projects/alma-host.webp",
+    imageAlt: "Inicio del sitio web de Alma Host",
     liveUrl: "https://alma-host-frontend.vercel.app/",
   },
 ];
