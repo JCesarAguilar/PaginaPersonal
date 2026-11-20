@@ -4,7 +4,6 @@ export const SITE = {
   name: "Julio Aguilar",
   url: "https://julio-aguilar.vercel.app",
   initials: "JA",
-  cvUrl: "/CV_Julio_Aguilar.pdf",
   social: [
     {
       name: "LinkedIn",

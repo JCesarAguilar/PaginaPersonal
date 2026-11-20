@@ -11,7 +11,7 @@ import { getContent, type Locale } from "@/src/i18n/config";
 // Columna izquierda: quién eres, navegación con la sección activa y enlaces.
 // En escritorio queda fija mientras la columna derecha hace scroll.
 export default function ProfileAside({ locale }: { locale: Locale }) {
-  const { HERO, UI } = getContent(locale);
+  const { HERO, SITE_TEXT, UI } = getContent(locale);
   const publicNavItems = useMemo(() => getNavItems(locale), [locale]);
   const [active, setActive] = useState<string>(
     toSectionId(publicNavItems[0].route),
@@ -105,7 +105,7 @@ export default function ProfileAside({ locale }: { locale: Locale }) {
           ))}
         </ul>
         <a
-          href={SITE.cvUrl}
+          href={SITE_TEXT.cvUrl}
           download
           className="inline-flex items-center gap-2 rounded-full border border-green-main/60 px-4 py-2 font-mono text-sm text-green-main transition-colors hover:bg-green-main hover:text-black-background"
         >

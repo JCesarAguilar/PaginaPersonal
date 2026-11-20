@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { getNavItems } from "@/src/helpers/publicNavItems";
-import { SITE } from "@/src/data/site";
 import { getContent, type Locale } from "@/src/i18n/config";
 
 export default function HamburguerMenu({ locale }: { locale: Locale }) {
-  const { UI } = getContent(locale);
+  const { SITE_TEXT, UI } = getContent(locale);
   const publicNavItems = getNavItems(locale);
   const [open, setOpen] = useState(false);
 
@@ -62,7 +61,7 @@ export default function HamburguerMenu({ locale }: { locale: Locale }) {
         </nav>
 
         <a
-          href={SITE.cvUrl}
+          href={SITE_TEXT.cvUrl}
           download
           onClick={close}
           className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-main text-black-background font-mono text-sm font-bold"
