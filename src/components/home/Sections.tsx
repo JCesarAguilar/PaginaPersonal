@@ -1,5 +1,11 @@
 import Image from "next/image";
-import { ArrowUpRight, AudioLines, GitCompare, Network } from "lucide-react";
+import {
+  ArrowUpRight,
+  AudioLines,
+  GitCompare,
+  LayoutTemplate,
+  Network,
+} from "lucide-react";
 
 import { ABOUT_PARAGRAPHS } from "@/src/data/about";
 import { EXPERIENCE } from "@/src/data/experience";
@@ -93,6 +99,7 @@ const COVER_ICONS = {
   voice: AudioLines,
   compare: GitCompare,
   agents: Network,
+  web: LayoutTemplate,
 };
 
 function ProjectThumb({ project }: { project: Project }) {
@@ -153,6 +160,7 @@ export function ProjectsBlock() {
               <p className="text-sm leading-relaxed text-fog">
                 {project.description}
               </p>
+{project.metrics.length > 0 && (
               <dl className="flex flex-wrap gap-x-6 gap-y-2">
                 {project.metrics.map((m) => (
                   <div key={m.label} className="flex items-baseline gap-2">
@@ -163,6 +171,7 @@ export function ProjectsBlock() {
                   </div>
                 ))}
               </dl>
+              )}
               <Chips items={project.stack} />
               <div className="flex flex-wrap gap-5 pt-1">
                 {project.liveUrl && (

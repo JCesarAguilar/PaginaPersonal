@@ -12,7 +12,7 @@ export interface Project {
   metrics: Metric[];
   // Sin imagen, la tarjeta muestra una portada con el ícono de "cover".
   image?: string;
-  cover?: "voice" | "compare" | "agents";
+  cover?: "voice" | "compare" | "agents" | "web";
   imageAlt?: string;
   liveUrl?: string;
   codeUrl?: string;
@@ -103,5 +103,30 @@ export const PROJECTS: Project[] = [
     liveUrl:
       "https://jcesaraguilar-asistente-legal-rag-app-dvxyfy.streamlit.app/",
     codeUrl: `${GITHUB}/asistente_legal_RAG`,
+  },
+  {
+    slug: "marchand-ramos-web",
+    tag: "Sitio web corporativo",
+    title: "Marchand Ramos Contratistas Generales",
+    description:
+      "Sitio corporativo de una constructora peruana de edificaciones, viviendas y obras civiles. Me encargué del diseño, el frontend y el despliegue: servicios, portafolio de obras y contacto, con imágenes optimizadas y SEO para Google.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    metrics: [],
+    cover: "web",
+    liveUrl: "https://marchand-ramos-web.vercel.app/",
+  },
+  {
+    slug: "alma-host",
+    tag: "Sitio web",
+    title: "Alma Host",
+    description:
+      "Sitio de un hospedaje en Pucallpa, parte del grupo Marchand Ramos. Lo construí con foco en velocidad y accesibilidad para que cualquier huésped lo use sin fricción, también desde el celular.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    metrics: [
+      { value: "99/100", label: "rendimiento en Lighthouse" },
+      { value: "100/100", label: "accesibilidad en Lighthouse" },
+    ],
+    cover: "web",
+    liveUrl: "https://alma-host-frontend.vercel.app/",
   },
 ];
