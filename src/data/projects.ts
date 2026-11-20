@@ -62,19 +62,19 @@ export const PROJECTS: Project[] = [
     codeUrl: `${GITHUB}/voice-receptionist`,
   },
   {
-    slug: "contract-comparison-agent",
-    tag: "Sistema multiagente",
-    title: "Comparador de contratos",
+    slug: "alma-host",
+    tag: "Sitio web",
+    title: "Alma Host",
     description:
-      "Recibe las imágenes escaneadas de un contrato y su enmienda, las transcribe con GPT-4o (visión) y dos agentes detectan cada cambio legal. Devuelve un JSON validado y cada paso queda trazado en Langfuse.",
-    stack: ["Python", "LangChain", "GPT-4o", "Pydantic", "Langfuse", "pytest"],
+      "Sitio de un hospedaje en Pucallpa, parte del grupo Marchand Ramos. Lo construí con foco en velocidad y accesibilidad para que cualquier huésped lo use sin fricción, también desde el celular.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
     metrics: [
-      { value: "14/14", label: "cambios detectados, sin falsos positivos" },
-      { value: "~9 s", label: "por comparación" },
-      { value: "−40%", label: "de latencia tras optimizar con datos" },
+      { value: "99/100", label: "rendimiento en Lighthouse" },
+      { value: "100/100", label: "accesibilidad en Lighthouse" },
     ],
-    cover: "compare",
-    codeUrl: `${GITHUB}/contract-comparison-agent`,
+    image: "/images/projects/alma-host.webp",
+    imageAlt: "Inicio del sitio web de Alma Host",
+    liveUrl: "https://alma-host-frontend.vercel.app/",
   },
   {
     slug: "multi-agent-support",
@@ -91,20 +91,6 @@ export const PROJECTS: Project[] = [
     codeUrl: `${GITHUB}/multi-agent-support`,
   },
   {
-    slug: "asistente-legal-rag",
-    tag: "RAG",
-    title: "Asistente Legal RAG",
-    description:
-      "Consulta en lenguaje natural la Constitución y los principales códigos del Perú, con cita exacta de artículo y código. Retriever híbrido (MMR + MultiQuery + similitud) sobre Pinecone y OCR selectivo en la ingesta.",
-    stack: ["Python", "LangChain", "Pinecone", "RAG", "Tesseract OCR", "Streamlit"],
-    metrics: [{ value: "100%", label: "respuestas con fuente citada" }],
-    image: "/images/projects/asistente-legal-rag.webp",
-    imageAlt: "Asistente Legal RAG respondiendo una consulta",
-    liveUrl:
-      "https://jcesaraguilar-asistente-legal-rag-app-dvxyfy.streamlit.app/",
-    codeUrl: `${GITHUB}/asistente_legal_RAG`,
-  },
-  {
     slug: "marchand-ramos-web",
     tag: "Sitio web corporativo",
     title: "Marchand Ramos Contratistas Generales",
@@ -117,18 +103,32 @@ export const PROJECTS: Project[] = [
     liveUrl: "https://marchand-ramos-web.vercel.app/",
   },
   {
-    slug: "alma-host",
-    tag: "Sitio web",
-    title: "Alma Host",
+    slug: "contract-comparison-agent",
+    tag: "Sistema multiagente",
+    title: "Comparador de contratos",
     description:
-      "Sitio de un hospedaje en Pucallpa, parte del grupo Marchand Ramos. Lo construí con foco en velocidad y accesibilidad para que cualquier huésped lo use sin fricción, también desde el celular.",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+      "Recibe las imágenes escaneadas de un contrato y su enmienda, las transcribe con GPT-4o (visión) y dos agentes detectan cada cambio legal. Devuelve un JSON validado y cada paso queda trazado en Langfuse.",
+    stack: ["Python", "LangChain", "GPT-4o", "Pydantic", "Langfuse", "pytest"],
     metrics: [
-      { value: "99/100", label: "rendimiento en Lighthouse" },
-      { value: "100/100", label: "accesibilidad en Lighthouse" },
+      { value: "14/14", label: "cambios detectados, sin falsos positivos" },
+      { value: "~9 s", label: "por comparación" },
+      { value: "−40%", label: "de latencia tras optimizar con datos" },
     ],
-    image: "/images/projects/alma-host.webp",
-    imageAlt: "Inicio del sitio web de Alma Host",
-    liveUrl: "https://alma-host-frontend.vercel.app/",
+    cover: "compare",
+    codeUrl: `${GITHUB}/contract-comparison-agent`,
+  },
+  {
+    slug: "asistente-legal-rag",
+    tag: "RAG",
+    title: "Asistente Legal RAG",
+    description:
+      "Consulta en lenguaje natural la Constitución y los principales códigos del Perú, con cita exacta de artículo y código. Retriever híbrido (MMR + MultiQuery + similitud) sobre Pinecone y OCR selectivo en la ingesta.",
+    stack: ["Python", "LangChain", "Pinecone", "RAG", "Tesseract OCR", "Streamlit"],
+    metrics: [{ value: "100%", label: "respuestas con fuente citada" }],
+    image: "/images/projects/asistente-legal-rag.webp",
+    imageAlt: "Asistente Legal RAG respondiendo una consulta",
+    liveUrl:
+      "https://jcesaraguilar-asistente-legal-rag-app-dvxyfy.streamlit.app/",
+    codeUrl: `${GITHUB}/asistente_legal_RAG`,
   },
 ];
