@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
     tag: "Producto en producción",
     title: "RedLegal.pe",
     description:
-      "Marketplace legal en producción que conecta a personas con abogados verificados en Perú por especialidad y ciudad, con contacto directo por WhatsApp y suscripciones de pago para abogados. Lo fundé y lo construyo de punta a punta: producto, arquitectura, backend, frontend, despliegue y crecimiento. Con Next.js genero más de 150 landing pages por especialidad y ciudad indexadas en Google; una API modular en NestJS sobre PostgreSQL resuelve las búsquedas con filtros múltiples, y mido el embudo con eventos en PostHog para decidir con datos.",
+      "Marketplace legal en producción que conecta a personas con abogados verificados en Perú por especialidad y ciudad, con contacto directo por WhatsApp y suscripciones de pago para abogados. Lo construí de punta a punta, del producto al despliegue.",
     stack: [
       "Next.js",
       "NestJS",
