@@ -20,6 +20,17 @@ export const UI = {
   techList: "Tecnologías",
   viewProject: "Ver proyecto",
   viewCode: "Ver código",
+  archive: {
+    link: "Enlace",
+    cta: "Ver archivo completo de proyectos",
+    title: "Todos los proyectos",
+    description:
+      "Lo que he construido, de los primeros sitios web a los sistemas de IA en producción.",
+    year: "Año",
+    project: "Proyecto",
+    madeAt: "Hecho en",
+    builtWith: "Tecnologías",
+  },
   codeLinkLabel: (title: string) =>
     `de ${title} en GitHub (se abre en una pestaña nueva)`,
 } as const;
