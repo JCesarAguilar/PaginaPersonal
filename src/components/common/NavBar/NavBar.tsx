@@ -13,15 +13,15 @@ export default function NavBar({ locale }: { locale: Locale }) {
       {/* Marca: vuelve al inicio */}
       <Link
         href={localePath(locale, "/")}
-        aria-label={`${SITE.name}, ${UI.nav.goHome}`}
         className="relative z-50 flex items-center gap-3"
       >
         <span className="flex h-10 w-10 items-center justify-center rounded-full border border-green-main font-mono text-sm font-bold text-green-main">
           {SITE.initials}
         </span>
-        <span className="hidden sm:inline font-mono text-sm text-white-smoke">
+        <span className="sr-only sm:not-sr-only font-mono text-sm text-white-smoke">
           {SITE.name}
         </span>
+        <span className="sr-only">, {UI.nav.goHome}</span>
       </Link>
 
       {/* Móvil: idioma y menú hamburguesa a la derecha */}

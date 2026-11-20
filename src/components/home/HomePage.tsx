@@ -11,21 +11,40 @@ import { getContent, localePath, type Locale } from "@/src/i18n/config";
 
 // Página de inicio, igual en ambos idiomas; solo cambia el texto.
 export default function HomePage({ locale }: { locale: Locale }) {
-  const { SITE_TEXT } = getContent(locale);
+  const { SITE_TEXT, EXPERIENCE } = getContent(locale);
+  const pageUrl = `${SITE.url}${localePath(locale, "/") === "/" ? "" : localePath(locale, "/")}`;
 
-  // Datos estructurados para que Google entienda quién eres.
-  const personJsonLd = {
+  // Datos estructurados (schema.org) para que Google entienda quién eres:
+  // una página de perfil cuyo tema principal es una persona.
+  const profileJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: SITE.name,
-    url: `${SITE.url}${localePath(locale, "/") === "/" ? "" : localePath(locale, "/")}`,
-    jobTitle: SITE_TEXT.jobTitle,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Lima",
-      addressCountry: "PE",
+    "@type": "ProfilePage",
+    url: pageUrl,
+    inLanguage: locale,
+    mainEntity: {
+      "@type": "Person",
+      "@id": `${SITE.url}/#person`,
+      name: SITE.name,
+      url: pageUrl,
+      jobTitle: SITE_TEXT.jobTitle,
+      description: SITE_TEXT.description,
+      knowsAbout: SITE_TEXT.knowsAbout,
+      knowsLanguage: ["es", "en"],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Lima",
+        addressCountry: "PE",
+      },
+      // Trabajos actuales: los que siguen "hoy" / "Present".
+      worksFor: EXPERIENCE.filter((e) => /(hoy|Present)$/.test(e.period)).map(
+        (e) => ({
+          "@type": "Organization",
+          name: e.company,
+          ...(e.url && { url: e.url }),
+        }),
+      ),
+      sameAs: SITE.social.map((s) => s.url),
     },
-    sameAs: SITE.social.map((s) => s.url),
   };
 
   return (
@@ -33,7 +52,7 @@ export default function HomePage({ locale }: { locale: Locale }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(profileJsonLd).replace(/</g, "\\u003c"),
         }}
       />
       <CursorSpotlight />

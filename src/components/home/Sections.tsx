@@ -109,7 +109,8 @@ function ProjectThumb({ project }: { project: Project }) {
         fill
         src={project.image}
         alt={project.imageAlt ?? project.title}
-        sizes="(min-width: 640px) 200px, 100vw"
+        // Sin "vw" para que Next ofrezca tamaños chicos en escritorio.
+        sizes="(min-width: 640px) 200px, 360px"
         className="object-cover object-top"
       />
     );

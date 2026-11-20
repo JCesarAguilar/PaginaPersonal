@@ -8,6 +8,17 @@ export const SITE_TEXT: Content["SITE_TEXT"] = {
   cvUrl: "/CV_Julio_Aguilar_EN.pdf",
   description:
     "AI Engineer & Full Stack Developer in Lima, Peru. I turn manual processes into AI systems that save hours of work and take them from idea to production.",
-  ogTagline:
-    "I turn manual processes into AI systems that save hours of work.",
+  knowsAbout: [
+    "Artificial intelligence",
+    "AI agents",
+    "RAG",
+    "Voice agents",
+    "Process automation",
+    "Full stack development",
+    "Next.js",
+    "NestJS",
+    "TypeScript",
+    "Product management",
+  ],
+  ogTagline: "I turn manual processes into AI systems that save hours of work.",
 };
