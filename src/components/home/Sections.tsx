@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { STAGES } from "@/src/data/about";
 import { EXPERIENCE } from "@/src/data/experience";
 import { PROJECTS, type Project } from "@/src/data/projects";
-import { STACK_CATEGORIES } from "@/src/data/stack";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
 
 // Título de sección: en móvil queda pegado arriba al hacer scroll;
@@ -203,44 +202,6 @@ export function ProjectsBlock() {
           </li>
         ))}
       </ul>
-    </section>
-  );
-}
-
-export function StackBlock() {
-  return (
-    <section id={toSectionId(PATHROUTES.STACK)} className="scroll-mt-24">
-      <SectionHeading>Stack</SectionHeading>
-      <div className="flex flex-col gap-6">
-        {STACK_CATEGORIES.map((cat) => (
-          <div key={cat.label} className="grid gap-3 sm:grid-cols-[160px_1fr]">
-            <h3 className="pt-1 font-mono text-xs uppercase tracking-[0.15em] text-fog-dim">
-              {cat.label}
-            </h3>
-            <ul className="flex flex-wrap gap-2">
-              {cat.items.map((item) => (
-                <li
-                  key={item.name}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 text-sm text-white-smoke"
-                >
-                  {item.iconSrc && (
-                    <span className="flex h-5 w-5 items-center justify-center rounded bg-white-smoke">
-                      <Image
-                        src={item.iconSrc}
-                        alt=""
-                        width={14}
-                        height={14}
-                        unoptimized
-                      />
-                    </span>
-                  )}
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }

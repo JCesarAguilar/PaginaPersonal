@@ -4,7 +4,6 @@ import {
   AboutBlock,
   ExperienceBlock,
   ProjectsBlock,
-  StackBlock,
 } from "../components/home/Sections";
 import { SITE } from "../data/site";
 
@@ -42,7 +41,6 @@ export default function Home() {
           <AboutBlock />
           <ExperienceBlock />
           <ProjectsBlock />
-          <StackBlock />
           <footer className="font-mono text-xs text-fog-dim">
             © {new Date().getFullYear()} {SITE.name} · Lima, Perú
           </footer>
