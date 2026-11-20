@@ -1,6 +1,6 @@
 export const HERO = {
   greeting: "¡Hola! Soy",
-  title: "AI Engineer y Full Stack Product Engineer",
+  title: "AI Engineer & Full Stack Developer",
   tagline:
-    "Construyo aplicaciones con IA listas para producción: agentes, RAG y voz. Especifico antes de programar y mido los resultados con datos.",
+    "Convierto procesos manuales en sistemas con IA que ahorran horas de trabajo. Los llevo de la idea a producción y mido su impacto con datos.",
 };
