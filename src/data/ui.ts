@@ -10,7 +10,6 @@ export const UI = {
   nav: {
     sectionsLabel: "Secciones",
     mainLabel: "Menú principal",
-    desktopLabel: "Principal",
     openMenu: "Abrir menú",
     closeMenu: "Cerrar menú",
     goHome: "ir al inicio",

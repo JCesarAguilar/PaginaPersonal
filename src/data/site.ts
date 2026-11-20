@@ -9,7 +9,6 @@ export const SITE = {
   description:
     "AI Engineer y Full Stack Product Engineer en Lima. Construyo aplicaciones con IA listas para producción (agentes, RAG y voz) y productos web como RedLegal.pe.",
   ogTagline: "Sistemas de IA, RAG y productos full-stack en producción.",
-  email: "jcesar.a.15@gmail.com",
   cvUrl: "/CV_Julio_Aguilar.pdf",
   social: [
     {

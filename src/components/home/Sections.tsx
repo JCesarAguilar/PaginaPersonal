@@ -62,9 +62,9 @@ export function ExperienceBlock() {
         {EXPERIENCE.map((job) => (
           <li
             key={`${job.company}-${job.role}`}
-            className="grid gap-2 rounded-md border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/[0.03] sm:grid-cols-[120px_1fr] sm:gap-6 lg:-mx-5"
+            className="grid gap-2 rounded-md border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/3 sm:grid-cols-[120px_1fr] sm:gap-6 lg:-mx-5"
           >
-            <p className="pt-1 font-mono text-xs uppercase tracking-[0.1em] text-fog-dim">
+            <p className="pt-1 font-mono text-xs uppercase tracking-widest text-fog-dim">
               {job.period}
             </p>
             <div className="flex flex-col gap-3">
@@ -144,9 +144,9 @@ export function ProjectsBlock() {
         {PROJECTS.map((project) => (
           <li
             key={project.slug}
-            className="grid gap-5 rounded-md border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/[0.03] sm:grid-cols-[200px_1fr] lg:-mx-5"
+            className="grid gap-5 rounded-md border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/3 sm:grid-cols-[200px_1fr] lg:-mx-5"
           >
-            <div className="relative aspect-video overflow-hidden rounded border border-white/10 bg-white/[0.02] sm:mt-1">
+            <div className="relative aspect-video overflow-hidden rounded border border-white/10 bg-white/2 sm:mt-1">
               <ProjectThumb project={project} />
             </div>
 
@@ -160,17 +160,17 @@ export function ProjectsBlock() {
               <p className="text-sm leading-relaxed text-fog">
                 {project.description}
               </p>
-{project.metrics.length > 0 && (
-              <dl className="flex flex-wrap gap-x-6 gap-y-2">
-                {project.metrics.map((m) => (
-                  <div key={m.label} className="flex items-baseline gap-2">
-                    <dt className="order-2 text-xs text-fog">{m.label}</dt>
-                    <dd className="order-1 font-semibold text-green-main">
-                      {m.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+              {project.metrics.length > 0 && (
+                <dl className="flex flex-wrap gap-x-6 gap-y-2">
+                  {project.metrics.map((m) => (
+                    <div key={m.label} className="flex items-baseline gap-2">
+                      <dt className="order-2 text-xs text-fog">{m.label}</dt>
+                      <dd className="order-1 font-semibold text-green-main">
+                        {m.value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               )}
               <Chips items={project.stack} />
               <div className="flex flex-wrap gap-5 pt-1">

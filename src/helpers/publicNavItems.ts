@@ -1,7 +1,6 @@
 import { UI } from "@/src/data/ui";
 
 export enum PATHROUTES {
-  HOME = "/",
   ABOUT = "#sobre-mi",
   EXPERIENCE = "#experiencia",
   PROJECTS = "#proyectos",

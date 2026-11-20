@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
-import { cn } from "@/lib/utils";
 import { SITE } from "@/src/data/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -48,14 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="es"
       data-scroll-behavior="smooth"
-      className={cn(
-        "h-full",
-        "antialiased",
-        spaceGrotesk.variable,
-        jetBrainsMono.variable,
-        "font-sans",
-        inter.variable,
-      )}
+      className={`h-full antialiased font-sans ${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
     >
       <body className="min-h-full flex flex-col bg-black-background">
         {children}

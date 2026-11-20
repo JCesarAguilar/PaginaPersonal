@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import DownloadCVButton from "./DownloadCVButton";
-import NavItems from "./NavItems";
 import HamburguerMenu from "./HamburguerMenu";
 import { SITE } from "@/src/data/site";
 import { UI } from "@/src/data/ui";
@@ -23,12 +21,6 @@ export default function NavBar() {
           {SITE.name}
         </span>
       </Link>
-
-      {/* Escritorio: enlaces + CV a la derecha */}
-      <div className="hidden lg:flex gap-7 items-center">
-        <NavItems />
-        <DownloadCVButton label={UI.downloadCv} href={SITE.cvUrl} />
-      </div>
 
       {/* Móvil: menú hamburguesa a la derecha */}
       <HamburguerMenu />
