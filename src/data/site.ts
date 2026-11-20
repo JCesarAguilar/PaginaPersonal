@@ -1,7 +1,7 @@
 // Una sola fuente de verdad para tus datos personales.
 // Si algo cambia (CV, usuario, correo), se cambia aquí y nada más.
 export const SITE = {
-  name: "Julio César Aguilar",
+  name: "Julio Aguilar",
   url: "https://julio-aguilar.vercel.app",
   role: "AI Engineer · Full Stack Product Engineer",
   initials: "JA",

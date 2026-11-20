@@ -9,7 +9,7 @@ export interface Experience {
 
 export const EXPERIENCE: Experience[] = [
   {
-    period: "2026 — hoy",
+    period: "Set 2026 — hoy",
     role: "Full Stack AI Engineer · Part time",
     company: "Marchand Ramos Contratistas Generales",
     description:
@@ -17,7 +17,7 @@ export const EXPERIENCE: Experience[] = [
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "RAG"],
   },
   {
-    period: "2026 — hoy",
+    period: "Ene 2026 — hoy",
     role: "Propietario de producto",
     company: "RedLegal.pe",
     url: "https://redlegal.pe",
@@ -26,7 +26,7 @@ export const EXPERIENCE: Experience[] = [
     stack: ["Next.js", "NestJS", "PostgreSQL", "Culqi", "PostHog"],
   },
   {
-    period: "2010 — hoy",
+    period: "Ene 2010 — hoy",
     role: "Oficial",
     company: "Marina de Guerra del Perú",
     description:
