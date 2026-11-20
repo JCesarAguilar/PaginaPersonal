@@ -7,7 +7,6 @@ export interface StackItem {
 export interface StackCategory {
   label: string;
   items: StackItem[];
-  featured?: boolean; // ocupa todo el ancho de la grilla
 }
 
 const STACK_ICONS = "/images/logos/stack";
@@ -15,7 +14,6 @@ const STACK_ICONS = "/images/logos/stack";
 export const STACK_CATEGORIES: StackCategory[] = [
   {
     label: "Inteligencia artificial",
-    featured: true,
     items: [
       { name: "LLMs", iconSrc: "/images/logos/openai-icon.webp" },
       { name: "LangChain", iconSrc: "/images/logos/langchain-icon.webp" },

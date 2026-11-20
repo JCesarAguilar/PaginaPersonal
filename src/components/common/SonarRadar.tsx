@@ -137,17 +137,6 @@ export default function SonarRadar({ className = "" }: SonarRadarProps) {
           stagger: { each: 0.06, from: "random" },
           delay: 0.3,
         });
-
-        gsap.to(".radar-wrap", {
-          yPercent: 15,
-          opacity: 0.4,
-          scrollTrigger: {
-            trigger: rootRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
       });
     },
     { scope: rootRef },
