@@ -1,5 +1,6 @@
 import NavBar from "../components/common/NavBar/NavBar";
 import ProfileAside from "../components/layout/ProfileAside";
+import CursorSpotlight from "../components/common/CursorSpotlight";
 import {
   AboutBlock,
   ExperienceBlock,
@@ -31,11 +32,12 @@ export default function Home() {
           __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
         }}
       />
+      <CursorSpotlight />
       {/* En móvil se mantiene la barra superior con menú */}
       <div className="lg:hidden">
         <NavBar />
       </div>
-      <div className="mx-auto min-h-screen max-w-7xl px-6 md:px-12 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:px-20">
+      <div className="relative z-10 mx-auto min-h-screen max-w-7xl px-6 md:px-12 lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20 lg:px-20">
         <ProfileAside />
         <main className="flex flex-col gap-24 pb-24 pt-16 lg:py-24">
           <AboutBlock />
