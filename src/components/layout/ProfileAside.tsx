@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Download } from "lucide-react";
-import SonarRadar from "@/src/components/common/SonarRadar";
 import { HERO } from "@/src/data/hero";
 import { SITE } from "@/src/data/site";
 import { UI } from "@/src/data/ui";
@@ -34,14 +33,6 @@ export default function ProfileAside() {
 
   return (
     <header className="relative flex flex-col justify-between gap-12 pt-28 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:py-24">
-      {/* Radar: el motivo de la marca, ahora como fondo de la columna */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-[40%] hidden h-170 w-170 origin-top-right scale-[0.38] opacity-80 lg:block"
-      >
-        <SonarRadar />
-      </div>
-
       <div className="relative">
         <p className="font-mono text-sm text-fog">{HERO.greeting}</p>
         <h1 className="mt-2 font-display text-4xl font-bold leading-[1.05] text-white-smoke sm:text-5xl">
