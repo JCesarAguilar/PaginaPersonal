@@ -4,7 +4,6 @@ export enum PATHROUTES {
   EXPERIENCE = "#experiencia",
   PROJECTS = "#proyectos",
   STACK = "#stack",
-  CONTACT = "#contacto",
 }
 
 export function toSectionId(route: PATHROUTES): string {
@@ -27,9 +26,5 @@ export const publicNavItems = [
   {
     name: "Stack",
     route: PATHROUTES.STACK,
-  },
-  {
-    name: "Contacto",
-    route: PATHROUTES.CONTACT,
   },
 ];

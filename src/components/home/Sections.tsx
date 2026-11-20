@@ -6,8 +6,6 @@ import { EXPERIENCE } from "@/src/data/experience";
 import { PROJECTS, type Project } from "@/src/data/projects";
 import { STACK_CATEGORIES } from "@/src/data/stack";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
-import { SITE } from "@/src/data/site";
-import ContactForm from "@/src/components/home/ContactForm";
 
 // Título de sección: en móvil queda pegado arriba al hacer scroll;
 // en escritorio lo reemplaza el menú de la columna izquierda.
@@ -242,30 +240,6 @@ export function StackBlock() {
             </ul>
           </div>
         ))}
-      </div>
-    </section>
-  );
-}
-
-export function ContactBlock() {
-  return (
-    <section id={toSectionId(PATHROUTES.CONTACT)} className="scroll-mt-24">
-      <SectionHeading>Contacto</SectionHeading>
-      <h3 className="font-display text-4xl font-bold text-white-smoke md:text-5xl">
-        Hablemos.
-      </h3>
-      <p className="mt-4 max-w-md leading-relaxed text-fog">
-        ¿Tienes un rol o un proyecto con IA? Escríbeme a{" "}
-        <a
-          href={`mailto:${SITE.email}`}
-          className="text-white-smoke underline decoration-green-main/50 underline-offset-4 hover:text-green-main"
-        >
-          {SITE.email}
-        </a>{" "}
-        o usa el formulario. Respondo en menos de 24 h.
-      </p>
-      <div className="mt-8">
-        <ContactForm />
       </div>
     </section>
   );

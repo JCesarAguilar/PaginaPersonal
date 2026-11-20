@@ -2,7 +2,6 @@ import NavBar from "../components/common/NavBar/NavBar";
 import ProfileAside from "../components/layout/ProfileAside";
 import {
   AboutBlock,
-  ContactBlock,
   ExperienceBlock,
   ProjectsBlock,
   StackBlock,
@@ -44,7 +43,6 @@ export default function Home() {
           <ExperienceBlock />
           <ProjectsBlock />
           <StackBlock />
-          <ContactBlock />
           <footer className="font-mono text-xs text-fog-dim">
             © {new Date().getFullYear()} {SITE.name} · Lima, Perú
           </footer>
