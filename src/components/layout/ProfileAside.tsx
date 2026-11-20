@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Download } from "lucide-react";
+import { Download } from "lucide-react";
+import SocialIcon from "@/src/components/common/SocialIcon";
 import { HERO } from "@/src/data/hero";
 import { SITE } from "@/src/data/site";
 import { UI } from "@/src/data/ui";
@@ -80,19 +81,24 @@ export default function ProfileAside() {
       </div>
 
       <div className="relative flex flex-wrap items-center gap-x-6 gap-y-3">
-        {SITE.social.map((link) => (
-          <a
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-mono text-sm text-fog transition-colors hover:text-green-main"
-          >
-            {link.name}
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">{UI.newTab}</span>
-          </a>
-        ))}
+        <ul className="flex items-center gap-5">
+          {SITE.social.map((link) => (
+            <li key={link.name}>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={link.name}
+                className="block text-fog transition-colors hover:text-green-main"
+              >
+                <SocialIcon name={link.icon} />
+                <span className="sr-only">
+                  {link.name} {UI.newTab}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
         <a
           href={SITE.cvUrl}
           download

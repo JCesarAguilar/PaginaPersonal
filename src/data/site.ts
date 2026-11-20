@@ -14,8 +14,9 @@ export const SITE = {
   social: [
     {
       name: "LinkedIn",
+      icon: "linkedin",
       url: "https://www.linkedin.com/in/julio-cesar-aguilar-dev",
     },
-    { name: "GitHub", url: "https://github.com/JCesarAguilar" },
+    { name: "GitHub", icon: "github", url: "https://github.com/JCesarAguilar" },
   ],
 } as const;
