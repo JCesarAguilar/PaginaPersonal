@@ -55,7 +55,7 @@ export function ExperienceBlock() {
         {EXPERIENCE.map((job) => (
           <li
             key={`${job.company}-${job.role}`}
-            className="grid gap-2 rounded-2xl border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/[0.03] sm:grid-cols-[120px_1fr] sm:gap-6 lg:-mx-5"
+            className="grid gap-2 rounded-md border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/[0.03] sm:grid-cols-[120px_1fr] sm:gap-6 lg:-mx-5"
           >
             <p className="pt-1 font-mono text-xs uppercase tracking-[0.1em] text-fog-dim">
               {job.period}
@@ -120,9 +120,9 @@ export function ProjectsBlock() {
         {PROJECTS.map((project) => (
           <li
             key={project.slug}
-            className="grid gap-5 rounded-2xl border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/[0.03] sm:grid-cols-[200px_1fr] lg:-mx-5"
+            className="grid gap-5 rounded-md border border-transparent p-5 transition-colors hover:border-white/10 hover:bg-white/[0.03] sm:grid-cols-[200px_1fr] lg:-mx-5"
           >
-            <div className="relative aspect-video overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] sm:mt-1">
+            <div className="relative aspect-video overflow-hidden rounded border border-white/10 bg-white/[0.02] sm:mt-1">
               <ProjectThumb project={project} />
             </div>
 
