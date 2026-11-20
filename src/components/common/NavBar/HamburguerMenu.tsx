@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X, Download } from "lucide-react";
-import { publicNavItems } from "@/src/helpers/publicNavItems";
+import { getNavItems } from "@/src/helpers/publicNavItems";
 import { SITE } from "@/src/data/site";
-import { UI } from "@/src/data/ui";
+import { getContent, type Locale } from "@/src/i18n/config";
 
-export default function HamburguerMenu() {
+export default function HamburguerMenu({ locale }: { locale: Locale }) {
+  const { UI } = getContent(locale);
+  const publicNavItems = getNavItems(locale);
   const [open, setOpen] = useState(false);
 
   // Solo mientras el menú está abierto: Escape lo cierra y el fondo no scrollea.

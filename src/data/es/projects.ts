@@ -1,22 +1,4 @@
-export interface Metric {
-  value: string;
-  label: string;
-}
-
-export interface Project {
-  slug: string;
-  tag: string;
-  title: string;
-  description: string;
-  stack: string[];
-  metrics: Metric[];
-  // Sin imagen, la tarjeta muestra una portada con el ícono de "cover".
-  image?: string;
-  cover?: "voice" | "compare" | "agents";
-  imageAlt?: string;
-  liveUrl?: string;
-  codeUrl?: string;
-}
+import type { Project } from "../types";
 
 const GITHUB = "https://github.com/JCesarAguilar";
 
@@ -52,7 +34,15 @@ export const PROJECTS: Project[] = [
     title: "Lucía, recepcionista de voz con IA",
     description:
       "Agente de voz en español para un estudio de abogados: responde preguntas, revisa la agenda real, reserva la cita, cobra por WhatsApp y deriva urgencias a una persona. Arquitectura hexagonal y evaluación con golden cases en llamadas reales.",
-    stack: ["Python", "FastAPI", "Vapi", "Langfuse", "Culqi", "Twilio", "pytest"],
+    stack: [
+      "Python",
+      "FastAPI",
+      "Vapi",
+      "Langfuse",
+      "Culqi",
+      "Twilio",
+      "pytest",
+    ],
     metrics: [
       { value: "13/13", label: "escenarios de prueba superados" },
       { value: "US$ 0,065", label: "costo promedio por llamada" },
@@ -123,7 +113,14 @@ export const PROJECTS: Project[] = [
     title: "Asistente Legal RAG",
     description:
       "Consulta en lenguaje natural la Constitución y los principales códigos del Perú, con cita exacta de artículo y código. Retriever híbrido (MMR + MultiQuery + similitud) sobre Pinecone y OCR selectivo en la ingesta.",
-    stack: ["Python", "LangChain", "Pinecone", "RAG", "Tesseract OCR", "Streamlit"],
+    stack: [
+      "Python",
+      "LangChain",
+      "Pinecone",
+      "RAG",
+      "Tesseract OCR",
+      "Streamlit",
+    ],
     metrics: [{ value: "100%", label: "respuestas con fuente citada" }],
     image: "/images/projects/asistente-legal-rag.webp",
     imageAlt: "Asistente Legal RAG respondiendo una consulta",

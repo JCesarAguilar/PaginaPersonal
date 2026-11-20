@@ -1,68 +1,61 @@
-// Archivo completo de proyectos (página /archivo).
-// Ordenados del más reciente al más antiguo.
-export interface ArchiveItem {
-  year: number;
-  title: string;
-  madeAt?: string;
-  stack: string[];
-  liveUrl?: string;
-  codeUrl?: string;
-}
+import type { ArchiveItem } from "../types";
 
+// Full project archive (/en/archivo), newest first.
 const GH = "https://github.com/JCesarAguilar";
 
 export const ARCHIVE: ArchiveItem[] = [
   {
     year: 2026,
-    title: "Lucía, recepcionista de voz con IA",
+    title: "Lucía, AI voice receptionist",
     stack: ["Python", "FastAPI", "Vapi", "Twilio", "Langfuse"],
     codeUrl: `${GH}/voice-receptionist`,
   },
   {
     year: 2026,
-    title: "Comparador de contratos",
+    title: "Contract comparison agent",
     madeAt: "Henry",
     stack: ["Python", "LangChain", "GPT-4o", "Langfuse", "Streamlit"],
     codeUrl: `${GH}/contract-comparison-agent`,
   },
   {
     year: 2026,
-    title: "Soporte interno multiagente",
+    title: "Multi-agent internal support",
     madeAt: "Henry",
     stack: ["Python", "LangChain", "ChromaDB", "Langfuse"],
     codeUrl: `${GH}/multi-agent-support`,
   },
   {
     year: 2026,
-    title: "Chatbot FAQ con RAG para un hostal",
+    title: "RAG FAQ chatbot for a guesthouse",
     madeAt: "Henry",
     stack: ["Python", "OpenAI", "Streamlit"],
     codeUrl: `${GH}/faq_rag_chatbot`,
   },
   {
     year: 2026,
-    title: "Asistente de tickets con LLM",
+    title: "LLM ticket assistant",
     stack: ["Python", "OpenAI", "Pydantic", "pytest"],
     codeUrl: `${GH}/llm-ticket-assistant`,
   },
   {
     year: 2026,
-    title: "Este portafolio",
+    title: "This portfolio",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://julio-aguilar.vercel.app",
     codeUrl: `${GH}/PaginaPersonal`,
   },
   {
     year: 2026,
-    title: "Asistente de soporte con prompts few-shot",
+    title: "Few-shot customer support assistant",
     stack: ["Python", "OpenAI", "Pydantic", "pytest"],
     codeUrl: `${GH}/multitasking-text-utility`,
   },
   {
     year: 2026,
-    title: "Asistente Legal RAG",
+    title: "Legal RAG assistant",
     stack: ["Python", "LangChain", "Pinecone", "Streamlit"],
-    liveUrl: "https://jcesaraguilar-asistente-legal-rag-app-dvxyfy.streamlit.app/",
+    liveUrl:
+      "https://jcesaraguilar-asistente-legal-rag-app-dvxyfy.streamlit.app/",
     codeUrl: `${GH}/asistente_legal_RAG`,
   },
   {
@@ -74,7 +67,7 @@ export const ARCHIVE: ArchiveItem[] = [
   },
   {
     year: 2026,
-    title: "Texto a voz",
+    title: "Text to speech",
     stack: ["Python", "Streamlit", "gTTS"],
     codeUrl: `${GH}/texto-a-voz`,
   },
@@ -101,7 +94,7 @@ export const ARCHIVE: ArchiveItem[] = [
   },
   {
     year: 2026,
-    title: "MatrixScreen, catálogo de películas",
+    title: "MatrixScreen, movie catalog",
     stack: ["JavaScript", "Express", "MongoDB"],
     liveUrl: "https://movieapp-matrixscreen.vercel.app",
     codeUrl: `${GH}/MovieApp-MatrixScreen-Fullstack`,
@@ -128,7 +121,7 @@ export const ARCHIVE: ArchiveItem[] = [
   },
   {
     year: 2025,
-    title: "Fund.ar, plataforma de donaciones",
+    title: "Fund.ar, donations platform",
     madeAt: "Henry",
     stack: ["Next.js", "TypeScript", "Clerk", "Formik"],
     liveUrl: "https://foundation-fundar.vercel.app",
@@ -143,7 +136,7 @@ export const ARCHIVE: ArchiveItem[] = [
   },
   {
     year: 2025,
-    title: "Gestor de turnos para barbería",
+    title: "Barbershop booking app",
     stack: ["React", "Express", "PostgreSQL", "TypeORM", "Nodemailer"],
     liveUrl: "https://barberapp-fullstack.vercel.app",
     codeUrl: `${GH}/Booking-BarberApp-Fullstack`,

@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import HamburguerMenu from "./HamburguerMenu";
+import LangSwitch from "@/src/components/common/LangSwitch";
 import { SITE } from "@/src/data/site";
-import { UI } from "@/src/data/ui";
+import { getContent, localePath, type Locale } from "@/src/i18n/config";
 
-export default function NavBar() {
+export default function NavBar({ locale }: { locale: Locale }) {
+  const { UI } = getContent(locale);
   return (
     <header className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-20 py-4 bg-black-background">
       {/* Marca: vuelve al inicio */}
       <Link
-        href="/"
+        href={localePath(locale, "/")}
         aria-label={`${SITE.name}, ${UI.nav.goHome}`}
         className="relative z-50 flex items-center gap-3"
       >
@@ -22,8 +24,11 @@ export default function NavBar() {
         </span>
       </Link>
 
-      {/* Móvil: menú hamburguesa a la derecha */}
-      <HamburguerMenu />
+      {/* Móvil: idioma y menú hamburguesa a la derecha */}
+      <div className="relative z-50 flex items-center gap-5">
+        <LangSwitch locale={locale} path="/" />
+        <HamburguerMenu locale={locale} />
+      </div>
     </header>
   );
 }

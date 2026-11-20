@@ -1,16 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Download } from "lucide-react";
 import SocialIcon from "@/src/components/common/SocialIcon";
-import { HERO } from "@/src/data/hero";
+import LangSwitch from "@/src/components/common/LangSwitch";
 import { SITE } from "@/src/data/site";
-import { UI } from "@/src/data/ui";
-import { publicNavItems, toSectionId } from "@/src/helpers/publicNavItems";
+import { getNavItems, toSectionId } from "@/src/helpers/publicNavItems";
+import { getContent, type Locale } from "@/src/i18n/config";
 
 // Columna izquierda: quién eres, navegación con la sección activa y enlaces.
 // En escritorio queda fija mientras la columna derecha hace scroll.
-export default function ProfileAside() {
+export default function ProfileAside({ locale }: { locale: Locale }) {
+  const { HERO, UI } = getContent(locale);
+  const publicNavItems = useMemo(() => getNavItems(locale), [locale]);
   const [active, setActive] = useState<string>(
     toSectionId(publicNavItems[0].route),
   );
@@ -30,7 +32,7 @@ export default function ProfileAside() {
     );
     sections.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [publicNavItems]);
 
   return (
     <header className="relative flex flex-col justify-between gap-12 pt-28 lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden lg:py-24">
@@ -44,7 +46,10 @@ export default function ProfileAside() {
         </p>
         <p className="mt-5 max-w-sm leading-relaxed text-fog">{HERO.tagline}</p>
 
-        <nav aria-label={UI.nav.sectionsLabel} className="mt-14 hidden lg:block">
+        <nav
+          aria-label={UI.nav.sectionsLabel}
+          className="mt-14 hidden lg:block"
+        >
           <ul className="flex flex-col gap-4">
             {publicNavItems.map((item) => {
               const id = toSectionId(item.route);
@@ -107,6 +112,7 @@ export default function ProfileAside() {
           <Download className="h-4 w-4" aria-hidden="true" />
           {UI.downloadCv}
         </a>
+        <LangSwitch locale={locale} path="/" className="hidden lg:flex" />
       </div>
     </header>
   );

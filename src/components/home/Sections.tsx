@@ -8,11 +8,9 @@ import {
   Network,
 } from "lucide-react";
 
-import { ABOUT_PARAGRAPHS } from "@/src/data/about";
-import { EXPERIENCE } from "@/src/data/experience";
-import { PROJECTS, type Project } from "@/src/data/projects";
+import type { Project } from "@/src/data/types";
+import { getContent, localePath, type Locale } from "@/src/i18n/config";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
-import { UI } from "@/src/data/ui";
 
 // Título de sección: en móvil queda pegado arriba al hacer scroll;
 // en escritorio lo reemplaza el menú de la columna izquierda.
@@ -26,9 +24,9 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Chips({ items }: { items: string[] }) {
+function Chips({ items, label }: { items: string[]; label: string }) {
   return (
-    <ul className="flex flex-wrap gap-2" aria-label={UI.techList}>
+    <ul className="flex flex-wrap gap-2" aria-label={label}>
       {items.map((t) => (
         <li
           key={t}
@@ -41,7 +39,8 @@ function Chips({ items }: { items: string[] }) {
   );
 }
 
-export function AboutBlock() {
+export function AboutBlock({ locale }: { locale: Locale }) {
+  const { ABOUT_PARAGRAPHS, UI } = getContent(locale);
   return (
     <section id={toSectionId(PATHROUTES.ABOUT)} className="scroll-mt-24">
       <SectionHeading>{UI.sections.about}</SectionHeading>
@@ -54,7 +53,8 @@ export function AboutBlock() {
   );
 }
 
-export function ExperienceBlock() {
+export function ExperienceBlock({ locale }: { locale: Locale }) {
+  const { EXPERIENCE, UI } = getContent(locale);
   return (
     <section id={toSectionId(PATHROUTES.EXPERIENCE)} className="scroll-mt-24">
       <SectionHeading>{UI.sections.experience}</SectionHeading>
@@ -87,7 +87,7 @@ export function ExperienceBlock() {
               <p className="text-sm leading-relaxed text-fog">
                 {job.description}
               </p>
-              <Chips items={job.stack} />
+              <Chips items={job.stack} label={UI.techList} />
             </div>
           </li>
         ))}
@@ -136,7 +136,8 @@ function ProjectThumb({ project }: { project: Project }) {
   );
 }
 
-export function ProjectsBlock() {
+export function ProjectsBlock({ locale }: { locale: Locale }) {
+  const { PROJECTS, UI } = getContent(locale);
   return (
     <section id={toSectionId(PATHROUTES.PROJECTS)} className="scroll-mt-24">
       <SectionHeading>{UI.sections.projects}</SectionHeading>
@@ -172,7 +173,7 @@ export function ProjectsBlock() {
                   ))}
                 </dl>
               )}
-              <Chips items={project.stack} />
+              <Chips items={project.stack} label={UI.techList} />
               <div className="flex flex-wrap gap-5 pt-1">
                 {project.liveUrl && (
                   <a
@@ -208,7 +209,7 @@ export function ProjectsBlock() {
         ))}
       </ul>
       <Link
-        href="/archivo"
+        href={localePath(locale, "/archivo")}
         className="group mt-10 inline-flex items-center gap-2 font-semibold text-white-smoke transition-colors hover:text-green-main"
       >
         {UI.archive.cta}

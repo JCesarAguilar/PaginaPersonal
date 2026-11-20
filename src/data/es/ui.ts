@@ -14,6 +14,7 @@ export const UI = {
     closeMenu: "Cerrar menú",
     goHome: "ir al inicio",
   },
+  language: "Idioma",
   downloadCv: "Descargar CV",
   newTab: "(se abre en una pestaña nueva)",
   techList: "Tecnologías",
@@ -32,4 +33,4 @@ export const UI = {
   },
   codeLinkLabel: (title: string) =>
     `de ${title} en GitHub (se abre en una pestaña nueva)`,
-} as const;
+};

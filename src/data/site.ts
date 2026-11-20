@@ -1,14 +1,9 @@
-// Una sola fuente de verdad para tus datos personales.
-// Si algo cambia (CV, usuario, correo), se cambia aquí y nada más.
+// Datos personales que no cambian con el idioma.
+// Los textos traducibles están en src/data/es y src/data/en.
 export const SITE = {
   name: "Julio Aguilar",
   url: "https://julio-aguilar.vercel.app",
-  role: "AI Engineer · Full Stack Product Engineer",
   initials: "JA",
-  location: "Lima, Perú",
-  description:
-    "AI Engineer y Full Stack Product Engineer en Lima. Construyo aplicaciones con IA listas para producción (agentes, RAG y voz) y productos web como RedLegal.pe.",
-  ogTagline: "Sistemas de IA, RAG y productos full-stack en producción.",
   cvUrl: "/CV_Julio_Aguilar.pdf",
   social: [
     {

@@ -1,11 +1,4 @@
-export interface Experience {
-  period: string;
-  role: string;
-  company: string;
-  url?: string;
-  description: string;
-  stack: string[];
-}
+import type { Experience } from "../types";
 
 export const EXPERIENCE: Experience[] = [
   {
