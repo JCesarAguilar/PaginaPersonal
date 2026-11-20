@@ -17,8 +17,7 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const description =
-  "AI Engineer y Full Stack Product Engineer en Lima. Construyo aplicaciones con IA listas para producción (agentes, RAG y voz) y productos web como RedLegal.pe.";
+const description = SITE.description;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),

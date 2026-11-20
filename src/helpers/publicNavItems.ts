@@ -1,3 +1,5 @@
+import { UI } from "@/src/data/ui";
+
 export enum PATHROUTES {
   HOME = "/",
   ABOUT = "#sobre-mi",
@@ -11,15 +13,15 @@ export function toSectionId(route: PATHROUTES): string {
 
 export const publicNavItems = [
   {
-    name: "Sobre mí",
+    name: UI.sections.about,
     route: PATHROUTES.ABOUT,
   },
   {
-    name: "Experiencia",
+    name: UI.sections.experience,
     route: PATHROUTES.EXPERIENCE,
   },
   {
-    name: "Proyectos",
+    name: UI.sections.projects,
     route: PATHROUTES.PROJECTS,
   },
 ];

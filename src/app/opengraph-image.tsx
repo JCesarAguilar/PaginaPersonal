@@ -88,12 +88,12 @@ export default function Image() {
               lineHeight: 1.3,
             }}
           >
-            Sistemas de IA, RAG y productos full-stack en producción.
+            {SITE.ogTagline}
           </div>
         </div>
 
         <div style={{ display: "flex", fontSize: 24, color: "#93a7aa" }}>
-          Lima, Perú
+          {SITE.location}
         </div>
       </div>
     </div>,

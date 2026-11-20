@@ -1,35 +1,6 @@
-export interface Stage {
-  eyebrow: string;
-  headline: string;
-  body: string;
-  images: string[];
-  imageAlt: string;
-}
-
-export const STAGES: Stage[] = [
-  {
-    eyebrow: "2010 — hoy",
-    headline: "Oficial de la Marina de Guerra del Perú.",
-    body: "Durante mi formación en la Escuela Naval estudié en paralelo Ingeniería Industrial en la Universidad de Piura. Luego me especialicé en submarinos, donde aprendí el funcionamiento y empleo de todos los sistemas a bordo y a trabajar en equipo bajo presión.",
-    images: [
-      "/images/about/marina-1.webp",
-      "/images/about/marina-2.webp",
-      "/images/about/marina-3.webp",
-    ],
-    imageAlt: "Julio en la Marina de Guerra del Perú",
-  },
-  {
-    eyebrow: "La transición",
-    headline: "Mi pasión por la tecnología.",
-    body: "Empecé a programar de forma intensiva como desarrollador full-stack, construyendo proyectos de punta a punta. Luego me especialicé en inteligencia artificial: completé la carrera de AI Engineering en Henry y hoy curso un máster en IA, desde los fundamentos de las redes neuronales hasta RAG, agentes y voz.",
-    images: ["/images/about/setup-desarrollador.webp"],
-    imageAlt: "Julio programando en su escritorio",
-  },
-  {
-    eyebrow: "2026 — hoy",
-    headline: "Construyo IA y productos en producción.",
-    body: "Soy Full Stack AI Engineer a medio tiempo en Marchand Ramos Contratistas Generales: desarrollo sus sitios con Next.js y soluciones con IA como chatbots, agentes y sistemas RAG. En paralelo lidero RedLegal.pe, mi propio marketplace legal, de punta a punta: arquitectura, pagos, SEO y analítica.",
-    images: ["/images/projects/redlegal.webp"],
-    imageAlt: "RedLegal.pe, el marketplace legal que lidero",
-  },
+// Texto de la sección "Sobre mí": un párrafo por elemento.
+export const ABOUT_PARAGRAPHS: string[] = [
+  "¡Hola! Soy Julio y me gusta construir cosas que funcionan en el mundo real. Soy ingeniero de IA y full stack: diseño aplicaciones con agentes, RAG y voz, y las llevo de la idea a producción. Me importa especificar antes de programar, medir con datos y cuidar los detalles que hacen que un producto se sienta confiable.",
+  "Hoy trabajo como Full Stack AI Engineer en Marchand Ramos Contratistas Generales. Ahí desarrollo los sitios del grupo con Next.js y soluciones de atención al cliente con IA: chatbots, agentes y sistemas RAG. En paralelo lidero RedLegal.pe, el marketplace legal que fundé, desde la arquitectura y los pagos hasta el SEO y la analítica.",
+  "Antes de escribir mi primera línea de código aprendí a operar submarinos. Soy oficial de la Marina de Guerra del Perú desde 2010, y de ahí traigo la disciplina, el trabajo en equipo bajo presión y la costumbre de entender un sistema completo antes de tocarlo. Esa curiosidad me llevó a la programación, luego a la carrera de AI Engineering en Henry y hoy a un máster en IA.",
 ];

@@ -5,6 +5,7 @@ import { ArrowUpRight, Download } from "lucide-react";
 import SonarRadar from "@/src/components/common/SonarRadar";
 import { HERO } from "@/src/data/hero";
 import { SITE } from "@/src/data/site";
+import { UI } from "@/src/data/ui";
 import { publicNavItems, toSectionId } from "@/src/helpers/publicNavItems";
 
 // Columna izquierda: quién eres, navegación con la sección activa y enlaces.
@@ -51,7 +52,7 @@ export default function ProfileAside() {
         </p>
         <p className="mt-5 max-w-sm leading-relaxed text-fog">{HERO.tagline}</p>
 
-        <nav aria-label="Secciones" className="mt-14 hidden lg:block">
+        <nav aria-label={UI.nav.sectionsLabel} className="mt-14 hidden lg:block">
           <ul className="flex flex-col gap-4">
             {publicNavItems.map((item) => {
               const id = toSectionId(item.route);
@@ -98,7 +99,7 @@ export default function ProfileAside() {
           >
             {link.name}
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">(se abre en una pestaña nueva)</span>
+            <span className="sr-only">{UI.newTab}</span>
           </a>
         ))}
         <a
@@ -107,7 +108,7 @@ export default function ProfileAside() {
           className="inline-flex items-center gap-2 rounded-full border border-green-main/60 px-4 py-2 font-mono text-sm text-green-main transition-colors hover:bg-green-main hover:text-black-background"
         >
           <Download className="h-4 w-4" aria-hidden="true" />
-          Descargar CV
+          {UI.downloadCv}
         </a>
       </div>
     </header>

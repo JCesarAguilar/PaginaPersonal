@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { publicNavItems } from "@/src/helpers/publicNavItems";
 import { SITE } from "@/src/data/site";
+import { UI } from "@/src/data/ui";
 
 export default function HamburguerMenu() {
   const [open, setOpen] = useState(false);
@@ -34,7 +35,7 @@ export default function HamburguerMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="mobile-menu"
-        aria-label={open ? "Cerrar menú" : "Abrir menú"}
+        aria-label={open ? UI.nav.closeMenu : UI.nav.openMenu}
         className="relative z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-green-main/40 text-green-main"
       >
         {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -45,7 +46,7 @@ export default function HamburguerMenu() {
         hidden={!open}
         className="fixed inset-0 z-40 bg-black-background/95 backdrop-blur-sm px-6 pt-28 pb-10"
       >
-        <nav aria-label="Menú principal" className="flex flex-col gap-6">
+        <nav aria-label={UI.nav.mainLabel} className="flex flex-col gap-6">
           {publicNavItems.map((item) => (
             <a
               key={item.route}
@@ -65,7 +66,7 @@ export default function HamburguerMenu() {
           className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-main text-black-background font-mono text-sm font-bold"
         >
           <Download className="h-4 w-4" />
-          Descargar CV
+          {UI.downloadCv}
         </a>
       </div>
     </div>

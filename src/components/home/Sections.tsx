@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-import { STAGES } from "@/src/data/about";
+import { ABOUT_PARAGRAPHS } from "@/src/data/about";
 import { EXPERIENCE } from "@/src/data/experience";
 import { PROJECTS, type Project } from "@/src/data/projects";
 import { PATHROUTES, toSectionId } from "@/src/helpers/publicNavItems";
+import { UI } from "@/src/data/ui";
 
 // Título de sección: en móvil queda pegado arriba al hacer scroll;
 // en escritorio lo reemplaza el menú de la columna izquierda.
@@ -20,7 +21,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function Chips({ items }: { items: string[] }) {
   return (
-    <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
+    <ul className="flex flex-wrap gap-2" aria-label={UI.techList}>
       {items.map((t) => (
         <li
           key={t}
@@ -36,31 +37,10 @@ function Chips({ items }: { items: string[] }) {
 export function AboutBlock() {
   return (
     <section id={toSectionId(PATHROUTES.ABOUT)} className="scroll-mt-24">
-      <SectionHeading>Sobre mí</SectionHeading>
+      <SectionHeading>{UI.sections.about}</SectionHeading>
       <div className="flex flex-col gap-5 leading-relaxed text-fog">
-        {STAGES.map((stage) => (
-          <p key={stage.eyebrow}>
-            <span className="mr-2 font-mono text-xs uppercase tracking-[0.15em] text-white-smoke">
-              {stage.eyebrow}
-            </span>
-            {stage.body}
-          </p>
-        ))}
-      </div>
-      <div className="mt-8 grid grid-cols-3 gap-3">
-        {STAGES[0].images.map((src, i) => (
-          <div
-            key={src}
-            className="relative aspect-square overflow-hidden rounded-xl border border-white/10"
-          >
-            <Image
-              fill
-              src={src}
-              alt={`${STAGES[0].imageAlt} (${i + 1})`}
-              sizes="(min-width: 1024px) 15vw, 30vw"
-              className="object-cover grayscale-[30%] transition duration-500 hover:grayscale-0"
-            />
-          </div>
+        {ABOUT_PARAGRAPHS.map((text) => (
+          <p key={text.slice(0, 24)}>{text}</p>
         ))}
       </div>
     </section>
@@ -70,7 +50,7 @@ export function AboutBlock() {
 export function ExperienceBlock() {
   return (
     <section id={toSectionId(PATHROUTES.EXPERIENCE)} className="scroll-mt-24">
-      <SectionHeading>Experiencia</SectionHeading>
+      <SectionHeading>{UI.sections.experience}</SectionHeading>
       <ol className="flex flex-col gap-4">
         {EXPERIENCE.map((job) => (
           <li
@@ -135,7 +115,7 @@ function ProjectThumb({ project }: { project: Project }) {
 export function ProjectsBlock() {
   return (
     <section id={toSectionId(PATHROUTES.PROJECTS)} className="scroll-mt-24">
-      <SectionHeading>Proyectos</SectionHeading>
+      <SectionHeading>{UI.sections.projects}</SectionHeading>
       <ul className="flex flex-col gap-4">
         {PROJECTS.map((project) => (
           <li
@@ -175,10 +155,10 @@ export function ProjectsBlock() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 font-mono text-sm text-white-smoke transition-colors hover:text-green-main"
                   >
-                    Ver proyecto
+                    {UI.viewProject}
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                     <span className="sr-only">
-                      {project.title} (se abre en una pestaña nueva)
+                      {project.title} {UI.newTab}
                     </span>
                   </a>
                 )}
@@ -189,11 +169,10 @@ export function ProjectsBlock() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 font-mono text-sm text-white-smoke transition-colors hover:text-green-main"
                   >
-                    Ver código
+                    {UI.viewCode}
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                     <span className="sr-only">
-                      de {project.title} en GitHub (se abre en una pestaña
-                      nueva)
+                      {UI.codeLinkLabel(project.title)}
                     </span>
                   </a>
                 )}

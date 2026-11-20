@@ -5,6 +5,7 @@ import DownloadCVButton from "./DownloadCVButton";
 import NavItems from "./NavItems";
 import HamburguerMenu from "./HamburguerMenu";
 import { SITE } from "@/src/data/site";
+import { UI } from "@/src/data/ui";
 
 export default function NavBar() {
   return (
@@ -12,11 +13,11 @@ export default function NavBar() {
       {/* Marca: vuelve al inicio */}
       <Link
         href="/"
-        aria-label={`${SITE.name}, ir al inicio`}
+        aria-label={`${SITE.name}, ${UI.nav.goHome}`}
         className="relative z-50 flex items-center gap-3"
       >
         <span className="flex h-10 w-10 items-center justify-center rounded-full border border-green-main font-mono text-sm font-bold text-green-main">
-          JA
+          {SITE.initials}
         </span>
         <span className="hidden sm:inline font-mono text-sm text-white-smoke">
           {SITE.name}
@@ -26,7 +27,7 @@ export default function NavBar() {
       {/* Escritorio: enlaces + CV a la derecha */}
       <div className="hidden lg:flex gap-7 items-center">
         <NavItems />
-        <DownloadCVButton label="Descargar CV" href={SITE.cvUrl} />
+        <DownloadCVButton label={UI.downloadCv} href={SITE.cvUrl} />
       </div>
 
       {/* Móvil: menú hamburguesa a la derecha */}

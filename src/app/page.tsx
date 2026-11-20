@@ -42,7 +42,7 @@ export default function Home() {
           <ExperienceBlock />
           <ProjectsBlock />
           <footer className="font-mono text-xs text-fog-dim">
-            © {new Date().getFullYear()} {SITE.name} · Lima, Perú
+            © {new Date().getFullYear()} {SITE.name} · {SITE.location}
           </footer>
         </main>
       </div>
