@@ -10,7 +10,7 @@ export interface Experience {
 export const EXPERIENCE: Experience[] = [
   {
     period: "2026 — hoy",
-    role: "Full Stack AI Engineer · medio tiempo",
+    role: "Full Stack AI Engineer · Part time",
     company: "Marchand Ramos Contratistas Generales",
     description:
       "Desarrollo los sitios del grupo con Next.js y soluciones con IA para atención al cliente: chatbots, agentes y sistemas RAG. Alma Host, uno de sus sitios, obtuvo 99/100 en rendimiento y 100/100 en accesibilidad en Lighthouse.",
@@ -18,7 +18,7 @@ export const EXPERIENCE: Experience[] = [
   },
   {
     period: "2026 — hoy",
-    role: "Fundador y Product Owner",
+    role: "Propietario de producto",
     company: "RedLegal.pe",
     url: "https://redlegal.pe",
     description:
