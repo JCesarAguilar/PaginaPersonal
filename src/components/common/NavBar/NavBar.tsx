@@ -25,8 +25,9 @@ export default function NavBar({ locale }: { locale: Locale }) {
       </Link>
 
       {/* Móvil: idioma y menú hamburguesa a la derecha */}
-      <div className="relative z-50 flex items-center gap-5">
-        <LangSwitch locale={locale} path="/" />
+      {/* Sin z-index propio: así el menú abierto queda debajo de la marca y del idioma */}
+      <div className="flex items-center gap-5">
+        <LangSwitch locale={locale} path="/" className="relative z-50" />
         <HamburguerMenu locale={locale} />
       </div>
     </header>

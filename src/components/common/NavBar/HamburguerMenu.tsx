@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X, Download } from "lucide-react";
+import SocialIcon from "@/src/components/common/SocialIcon";
+import { SITE } from "@/src/data/site";
 import { getNavItems } from "@/src/helpers/publicNavItems";
 import { getContent, type Locale } from "@/src/i18n/config";
 
@@ -37,38 +39,66 @@ export default function HamburguerMenu({ locale }: { locale: Locale }) {
         aria-expanded={open}
         aria-controls="mobile-menu"
         aria-label={open ? UI.nav.closeMenu : UI.nav.openMenu}
-        className="relative z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-green-main/40 text-green-main"
+        className="relative z-50 -mr-2 inline-flex h-11 w-11 items-center justify-center text-fog transition-colors hover:text-white-smoke"
       >
-        {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {open ? (
+          <X className="h-6 w-6" strokeWidth={1.5} />
+        ) : (
+          <Menu className="h-6 w-6" strokeWidth={1.5} />
+        )}
       </button>
 
+      {/* Mismo lenguaje visual que la columna izquierda de escritorio */}
       <div
         id="mobile-menu"
         hidden={!open}
-        className="fixed inset-0 z-40 bg-black-background/95 backdrop-blur-sm px-6 pt-28 pb-10"
+        className="fixed inset-0 z-40 flex flex-col justify-between bg-black-background px-6 pb-12 pt-32"
       >
-        <nav aria-label={UI.nav.mainLabel} className="flex flex-col gap-6">
-          {publicNavItems.map((item) => (
-            <a
-              key={item.route}
-              href={item.route}
-              onClick={close}
-              className="font-mono text-2xl text-white-smoke hover:text-green-main transition-colors"
-            >
-              {item.name}
-            </a>
-          ))}
+        <nav aria-label={UI.nav.mainLabel}>
+          <ul className="flex flex-col gap-7">
+            {publicNavItems.map((item) => (
+              <li key={item.route}>
+                <a
+                  href={item.route}
+                  onClick={close}
+                  className="group flex items-center gap-4 py-1 font-mono text-sm uppercase tracking-[0.2em] text-fog-dim transition-colors hover:text-white-smoke"
+                >
+                  <span className="h-px w-8 bg-fog-dim transition-all duration-300 group-hover:w-16 group-hover:bg-white-smoke" />
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        <a
-          href={SITE_TEXT.cvUrl}
-          download
-          onClick={close}
-          className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-main text-black-background font-mono text-sm font-bold"
-        >
-          <Download className="h-4 w-4" />
-          {UI.downloadCv}
-        </a>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+          <ul className="flex items-center gap-5">
+            {SITE.social.map((link) => (
+              <li key={link.name}>
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-fog transition-colors hover:text-green-main"
+                >
+                  <SocialIcon name={link.icon} />
+                  <span className="sr-only">
+                    {link.name} {UI.newTab}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={SITE_TEXT.cvUrl}
+            download
+            onClick={close}
+            className="inline-flex items-center gap-2 rounded-full border border-green-main/60 px-4 py-2 font-mono text-sm text-green-main transition-colors hover:bg-green-main hover:text-black-background"
+          >
+            <Download className="h-4 w-4" aria-hidden="true" />
+            {UI.downloadCv}
+          </a>
+        </div>
       </div>
     </div>
   );
