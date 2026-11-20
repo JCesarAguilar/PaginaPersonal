@@ -21,10 +21,10 @@ export default function ArchivePage() {
   return (
     <>
       <CursorSpotlight />
-      <main className="relative z-10 mx-auto min-h-screen w-full max-w-6xl px-6 py-16 md:px-12 lg:py-24">
+      <main className="relative z-10 mx-auto min-h-screen w-full max-w-7xl px-6 py-16 md:px-12 lg:px-20 lg:py-24">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 font-mono text-sm text-green-main"
+          className="group inline-flex items-center gap-2 font-semibold text-green-main"
         >
           <ArrowLeft
             className="h-4 w-4 transition-transform group-hover:-translate-x-1"
@@ -32,14 +32,13 @@ export default function ArchivePage() {
           />
           {SITE.name}
         </Link>
-        <h1 className="mt-4 font-display text-4xl font-bold text-white-smoke sm:text-5xl">
+        <h1 className="mt-2 font-display text-4xl font-bold tracking-tight text-white-smoke sm:text-5xl">
           {UI.archive.title}
         </h1>
-        <p className="mt-3 text-fog">{UI.archive.description}</p>
 
-        <table className="mt-12 w-full border-collapse text-left">
+        <table className="mt-16 w-full border-collapse text-left">
           <thead className="sticky top-0 z-10 border-b border-white/10 bg-black-background/85 backdrop-blur">
-            <tr className="font-mono text-xs uppercase tracking-[0.15em] text-white-smoke">
+            <tr className="text-sm font-semibold text-white-smoke">
               <th className="py-4 pr-6">{UI.archive.year}</th>
               <th className="py-4 pr-6">{UI.archive.project}</th>
               <th className="hidden py-4 pr-6 lg:table-cell">
@@ -57,12 +56,12 @@ export default function ArchivePage() {
               return (
                 <tr
                   key={item.title}
-                  className="border-b border-white/5 last:border-none"
+                  className="border-b border-white/10 last:border-none"
                 >
-                  <td className="py-4 pr-6 align-top font-mono text-sm text-fog-dim">
+                  <td className="py-5 pr-6 align-top text-sm text-fog-dim">
                     {item.year}
                   </td>
-                  <td className="py-4 pr-6 align-top font-semibold leading-snug text-white-smoke">
+                  <td className="py-5 pr-6 align-top font-semibold leading-snug text-white-smoke sm:max-w-xs">
                     {/* En móvil el nombre es el enlace; en pantallas grandes hay columna propia */}
                     {main ? (
                       <a
@@ -82,10 +81,10 @@ export default function ArchivePage() {
                       item.title
                     )}
                   </td>
-                  <td className="hidden py-4 pr-6 align-top text-sm text-fog lg:table-cell">
+                  <td className="hidden py-5 pr-6 align-top text-sm text-fog-dim lg:table-cell">
                     {item.madeAt}
                   </td>
-                  <td className="hidden py-4 pr-6 align-top lg:table-cell">
+                  <td className="hidden py-5 pr-6 align-top lg:table-cell">
                     <ul
                       className="flex flex-wrap gap-2"
                       aria-label={UI.techList}
@@ -93,14 +92,14 @@ export default function ArchivePage() {
                       {item.stack.map((t) => (
                         <li
                           key={t}
-                          className="rounded-full bg-green-main/10 px-3 py-1 font-mono text-[11px] text-green-main"
+                          className="rounded-full bg-green-main/10 px-3 py-1 text-xs font-medium text-green-main"
                         >
                           {t}
                         </li>
                       ))}
                     </ul>
                   </td>
-                  <td className="hidden py-4 align-top sm:table-cell">
+                  <td className="hidden py-5 align-top sm:table-cell">
                     <div className="flex items-center gap-4">
                       {item.liveUrl && (
                         <a
