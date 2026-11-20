@@ -5,6 +5,7 @@ export const SITE_TEXT = {
   location: "Lima, Perú",
   cvUrl: "/CV_Julio_Aguilar.pdf",
   description:
-    "AI Engineer & Full Stack Developer en Lima. Construyo aplicaciones con IA listas para producción (agentes, RAG y voz) y productos web como RedLegal.pe.",
-  ogTagline: "Sistemas de IA, RAG y productos full-stack en producción.",
+    "AI Engineer & Full Stack Developer en Lima. Convierto procesos manuales en sistemas con IA que ahorran horas de trabajo y los llevo de la idea a producción.",
+  ogTagline:
+    "Convierto procesos manuales en sistemas con IA que ahorran horas de trabajo.",
 };

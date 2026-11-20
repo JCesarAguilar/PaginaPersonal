@@ -7,6 +7,7 @@ export const SITE_TEXT: Content["SITE_TEXT"] = {
   location: "Lima, Peru",
   cvUrl: "/CV_Julio_Aguilar_EN.pdf",
   description:
-    "AI Engineer & Full Stack Developer in Lima, Peru. I build production-ready AI applications (agents, RAG and voice) and web products like RedLegal.pe.",
-  ogTagline: "AI systems, RAG and full-stack products in production.",
+    "AI Engineer & Full Stack Developer in Lima, Peru. I turn manual processes into AI systems that save hours of work and take them from idea to production.",
+  ogTagline:
+    "I turn manual processes into AI systems that save hours of work.",
 };
