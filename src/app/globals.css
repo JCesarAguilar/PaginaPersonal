@@ -31,3 +31,10 @@
     }
   }
 }
+
+/* Parpadeo del cursor del logo */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

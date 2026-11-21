@@ -15,8 +15,13 @@ export default function NavBar({ locale }: { locale: Locale }) {
         href={localePath(locale, "/")}
         className="relative z-50 flex items-center gap-3"
       >
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-green-main font-mono text-sm font-bold text-green-main">
+        {/* Logo estilo terminal, igual que el favicon: "JA" con cursor verde */}
+        <span className="flex h-10 items-end pb-2 font-mono text-xl font-extrabold leading-none tracking-tight text-white-smoke">
           {SITE.initials}
+          <span
+            aria-hidden="true"
+            className="mb-px ml-0.5 h-1 w-2.5 bg-green-main motion-safe:animate-[blink_1.1s_step-end_infinite]"
+          />
         </span>
         <span className="sr-only sm:not-sr-only font-mono text-sm text-white-smoke">
           {SITE.name}
