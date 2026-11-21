@@ -40,6 +40,11 @@ export default function ProfileAside({ locale }: { locale: Locale }) {
         <p className="font-mono text-sm text-fog">{HERO.greeting}</p>
         <h1 className="mt-2 font-display text-4xl font-bold leading-[1.05] text-white-smoke sm:text-5xl">
           {SITE.name}
+          {/* Cursor de terminal, como el logo y el favicon */}
+          <span
+            aria-hidden="true"
+            className="ml-[0.1em] inline-block h-[0.12em] w-[0.5em] bg-green-main align-baseline motion-safe:animate-[blink_1.1s_step-end_infinite]"
+          />
         </h1>
         <p className="mt-4 font-mono text-sm uppercase tracking-[0.2em] text-green-main">
           {HERO.title}
